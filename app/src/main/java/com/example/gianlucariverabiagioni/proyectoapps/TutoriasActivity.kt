@@ -59,22 +59,25 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
+            R.id.nav_horario -> {
                 // Handle the camera action
             }
-            R.id.nav_gallery -> {
+            R.id.nav_atencionProfesores -> {
 
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_tutorias -> {
 
             }
-            R.id.nav_manage -> {
+            R.id.nav_clubes -> {
 
             }
-            R.id.nav_share -> {
+            R.id.nav_biblioteca -> {
 
             }
-            R.id.nav_send -> {
+            R.id.nav_emergencia -> {
+
+            }
+            R.id.nav_configuracion -> {
 
             }
         }
