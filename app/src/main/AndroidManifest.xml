@@ -28,6 +28,26 @@
                 android:label="@string/title_activity_home"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+                android:name=".ProfesoresActivity"
+                android:label="@string/title_activity_profesores"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".TutoriasActivity"
+                android:label="@string/title_activity_tutorias"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".ClubesActivity"
+                android:label="@string/title_activity_clubes"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name=".BibliotecaActivity"
+                android:label="@string/title_activity_biblioteca"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

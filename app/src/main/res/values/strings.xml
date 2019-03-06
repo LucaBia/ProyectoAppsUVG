@@ -117,4 +117,8 @@
     <string name="configuraci_n">Configuración</string>
     <string name="biblioteca">Biblioteca</string>
     <string name="horario">Horario</string>
+    <string name="title_activity_profesores">ProfesoresActivity</string>
+    <string name="title_activity_tutorias">TutoriasActivity</string>
+    <string name="title_activity_clubes">ClubesActivity</string>
+    <string name="title_activity_biblioteca">BibliotecaActivity</string>
 </resources>
