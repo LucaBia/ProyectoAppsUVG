@@ -1,5 +1,6 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -60,18 +61,27 @@ class ClubesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_horario -> {
-                // Handle the camera action
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_atencionProfesores -> {
+                val intent2 = Intent(this, ProfesoresActivity::class.java)
+                startActivity(intent2)
 
             }
             R.id.nav_tutorias -> {
+                val intent3 = Intent(this, TutoriasActivity::class.java)
+                startActivity(intent3)
 
             }
             R.id.nav_clubes -> {
+                val intent4 = Intent(this, ClubesActivity::class.java)
+                startActivity(intent4)
 
             }
             R.id.nav_biblioteca -> {
+                val intent5 = Intent(this, BibliotecaActivity::class.java)
+                startActivity(intent5)
 
             }
             R.id.nav_emergencia -> {
