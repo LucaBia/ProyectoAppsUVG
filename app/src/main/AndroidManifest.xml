@@ -48,6 +48,11 @@
                 android:label="@string/title_activity_biblioteca"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+                android:name=".DetalleClubActivity"
+                android:label="@string/title_activity_detalle_club"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
