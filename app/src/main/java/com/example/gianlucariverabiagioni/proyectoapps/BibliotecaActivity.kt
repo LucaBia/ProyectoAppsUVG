@@ -1,6 +1,9 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -8,6 +11,10 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_biblioteca.*
 import kotlinx.android.synthetic.main.app_bar_biblioteca.*
 
@@ -18,9 +25,15 @@ class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         setContentView(R.layout.activity_biblioteca)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        val textAsunto = findViewById<TextView>(R.id.textAsunto)
+        val textMensaje = findViewById<TextView>(R.id.textMensaje)
+
+        mail.setOnClickListener { view ->
+            var correo = "cas18040@uvg.edu.gt"
+            var asunto:String = textAsunto.text.toString()
+            var mensaje:String = textMensaje.text.toString()
+
+            sendEmail(correo,asunto,mensaje)
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -30,6 +43,34 @@ class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val librosWebView = findViewById<WebView>(R.id.BookRes)
+        librosWebView.webViewClient = MyBrowser()
+        librosWebView.loadUrl("https://koha.uvg.edu.gt/#")
+
+    }
+    private fun sendEmail(correo: String, asunto: String, message: String){
+        val mIntent = Intent(Intent.ACTION_SEND)
+        mIntent.data = Uri.parse("mailto:")
+        mIntent.type = "text/plain"
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(correo))
+        mIntent.putExtra(Intent.EXTRA_SUBJECT, asunto)
+        mIntent.putExtra(Intent.EXTRA_TEXT, message)
+
+        try {
+            startActivity(Intent.createChooser(mIntent, "Choose email client..."))
+
+        }
+        catch (e: Exception){
+            //Si no funciona
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        }
+    }
+    private inner class MyBrowser : WebViewClient() {
+        override fun shouldOverrideUrlLoading(view: WebView, url: String): Boolean {
+            view.loadUrl(url)
+            return true
+        }
     }
 
     override fun onBackPressed() {

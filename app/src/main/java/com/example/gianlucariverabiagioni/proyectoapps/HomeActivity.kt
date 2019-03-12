@@ -1,6 +1,8 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
 import android.content.Intent
+import android.graphics.PorterDuff
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -9,12 +11,17 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    var telefonoEmergencia: Int =  111111
+    //var nw = findViewById<View>(R.id.nav_view) as NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //val nw = findViewById<View>(R.id.nav_view) as NavigationView
+        //nw.itemIconTintList = null
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         setSupportActionBar(toolbar)
@@ -31,6 +38,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        //nw.setItemIconTintList(null);
+
+
     }
 
     override fun onBackPressed() {
@@ -85,7 +95,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.nav_emergencia -> {
-
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:"+telefonoEmergencia)
+                startActivity(intent)
             }
             R.id.nav_configuracion -> {
 
