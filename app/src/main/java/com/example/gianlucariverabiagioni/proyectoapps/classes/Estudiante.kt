@@ -1,5 +1,7 @@
 package com.example.gianlucariverabiagioni.proyectoapps.classes
 
+import android.media.Image
+
 class Estudiante {
     var nombre: String
     var carne: String
@@ -7,6 +9,7 @@ class Estudiante {
     var contrasena: String
     var horario: Horario
     var tutor: Boolean
+    var image: Int
 
     constructor(nombre: String, carne: String, correo: String, contrasena: String, horario: Horario) {
         this.nombre = nombre
@@ -15,6 +18,7 @@ class Estudiante {
         this.contrasena = contrasena
         this.horario = horario
         this.tutor = false
+        this.image = 0
     }
 
 }

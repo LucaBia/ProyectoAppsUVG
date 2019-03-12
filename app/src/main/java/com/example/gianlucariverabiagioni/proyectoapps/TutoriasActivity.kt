@@ -10,8 +10,33 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_tutorias.*
 import kotlinx.android.synthetic.main.app_bar_tutorias.*
+import android.R.attr.data
+import android.content.Context
+import android.widget.TextView
+import com.example.gianlucariverabiagioni.proyectoapps.R.id.recyclerView
+import android.support.v7.widget.RecyclerView
+import android.view.View
+import com.example.gianlucariverabiagioni.proyectoapps.R.id.recyclerView
+import android.R.attr.data
+import android.support.v7.widget.DefaultItemAnimator
+import android.support.v7.widget.LinearLayoutManager
+import com.example.gianlucariverabiagioni.proyectoapps.R.attr.layoutManager
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.EstudianteAdapter
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.MyData
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
+
 
 class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+
+    private var adapter: RecyclerView.Adapter<*>? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
+    private var recyclerView: RecyclerView? = null
+    private var data: ArrayList<Estudiante>? = null
+    var myOnClickListener: View.OnClickListener? = null
+    private var removedItems: ArrayList<Int>? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +55,40 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+
+
+
+
+
+
+        //myOnClickListener = MyOnClickListener(this)
+
+        recyclerView = (findViewById(R.id.recyclerView) as RecyclerView)
+        recyclerView!!.setHasFixedSize(true)
+
+        layoutManager = LinearLayoutManager(this)
+        recyclerView!!.setLayoutManager(layoutManager)
+        recyclerView!!.setItemAnimator(DefaultItemAnimator())
+
+        data = ArrayList<Estudiante>()
+        for (i in 0 until MyData.nameArray.size) {
+            data!!.add(
+                Estudiante(
+                    MyData.nameArray[i],
+                    MyData.correoArray[i],
+                    MyData.correoArray[i],
+                    MyData.correoArray[i],
+                    Horario()
+                )
+            )
+        }
+
+        removedItems = ArrayList<Int>()
+
+        adapter = EstudianteAdapter(data!!)
+        recyclerView?.setAdapter(adapter)
+
     }
 
     override fun onBackPressed() {
