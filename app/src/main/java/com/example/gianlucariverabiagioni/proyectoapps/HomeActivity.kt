@@ -9,9 +9,12 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.app_bar_home.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    val miHorario : Horario = Horario()
     var telefonoEmergencia: Int =  59781736
     //var nw = findViewById<View>(R.id.nav_view) as NavigationView
 
@@ -20,12 +23,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_home)
         //val nw = findViewById<View>(R.id.nav_view) as NavigationView
         //nw.itemIconTintList = null
-        /*setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
+        modificar.setOnClickListener { view ->
+
+        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
