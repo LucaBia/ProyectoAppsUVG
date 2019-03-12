@@ -2,7 +2,12 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
+<<<<<<< HEAD
     <color name="colorAccent">#d81b60</color>
     <color name="colorFondo">#0e5430</color>
     <color name="navigation_drawer_icon">#FF000000</color>
+=======
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorFondo">#e00e5430</color>
+>>>>>>> 6f9489635e6efc44534b86762ecb542c9d8da3a3
 </resources>
