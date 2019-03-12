@@ -5,29 +5,28 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import com.example.gianlucariverabiagioni.proyectoapps.classes.Profesor
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import java.io.ByteArrayOutputStream
 import java.io.ObjectOutputStream
 
-class DbHelperProfesores(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
+class DbHelperClubes (context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
     companion object {
         private val DATABASE_VER = 1
-        private val DATABASE_NAME = "ProfesorDB.db"
+        private val DATABASE_NAME = "ClubDB.db"
 
         //Table
-        private val TABLE_NAME = "Profesores"
+        private val TABLE_NAME = "Clubs"
         private val COL_NOMBRE = "Nombre"
-        private val COL_CARNE = "Carne"
-        private val COL_CORREO = "Correo"
-        private val COL_CONTRASENA = "Contrasena"
         private val COL_HORARIO = "Horario"
-        private val COL_TUTOR = "Tutor"
+        private val COL_ENCARGADO = "Encargado"
+        private val COL_DESCRIPCION = "Descripcion"
 
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_CORREO TEXT $COL_HORARIO BLOB)")
+        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_HORARIO STRING, $COL_ENCARGADO TEXT, $COL_DESCRIPCION TEXT, $COL_HORARIO BLOB)")
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
 
@@ -38,9 +37,9 @@ class DbHelperProfesores(context: Context): SQLiteOpenHelper(context, DATABASE_N
 
     //CRUD
 
-    val allProfesores: List<Profesor>
+    val allClubs: List<Club>
         get() {
-            val lstProfesores = ArrayList<Profesor>()
+            val lstClubs = ArrayList<Club>()
             val selectQuery = "SELECT * FROM $TABLE_NAME"
             val db: SQLiteDatabase = this.writableDatabase
             val cursor: Cursor = db.rawQuery(selectQuery, null)
@@ -48,48 +47,50 @@ class DbHelperProfesores(context: Context): SQLiteOpenHelper(context, DATABASE_N
             if (cursor.moveToFirst()) {
                 do {
                     val nombre = cursor.getString(cursor.getColumnIndex(COL_NOMBRE))
-                    val carne = cursor.getString(cursor.getColumnIndex(COL_CARNE))
+                    val encargadoByteArray = cursor.getBlob(cursor.getColumnIndex(COL_ENCARGADO))
+                    val descripcion = cursor.getString(cursor.getColumnIndex(COL_DESCRIPCION))
                     val horarioByteArray = cursor.getBlob(cursor.getColumnIndex(COL_HORARIO))
+                    val encargado = BytesUtil.toObject(encargadoByteArray) as Estudiante
                     val horario = BytesUtil.toObject(horarioByteArray) as Horario
-                    val profesor = Profesor(nombre, carne, horario)
+                    val club = Club(nombre, horario, encargado, descripcion)
 
-                    lstProfesores.add(profesor)
+                    lstClubs.add(club)
                 } while (cursor.moveToNext())
             }
             db.close()
-            return lstProfesores
+            return lstClubs
         }
 
-    fun addProfesor(profesor: Profesor) {
+    fun addClub(club: Club) {
         val db: SQLiteDatabase = this.writableDatabase
         val values = ContentValues()
-        values.put(COL_NOMBRE, profesor.nombre)
-        values.put(COL_CORREO, profesor.correo)
-        val ba = ByteArrayOutputStream()
-        val oos = ObjectOutputStream(ba)
-        oos.writeObject(profesor.horario)
-        val arrayBytes = ba.toByteArray()
-        values.put(COL_HORARIO, arrayBytes)
+        values.put(COL_NOMBRE, club.nombre)
+        values.put(COL_DESCRIPCION, club.descripcion)
+        val horarioByteArray = BytesUtil.toByteArray(club.horario)
+        values.put(COL_HORARIO, horarioByteArray)
+        val encargadoByteArray = BytesUtil.toByteArray(club.encargado)
+        values.put(COL_ENCARGADO, encargadoByteArray)
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
 
-    fun updateProfesor(profesor: Profesor): Int {
+    fun updateClub(club: Club): Int {
         val db: SQLiteDatabase = this.writableDatabase
         val values = ContentValues()
+        val encargadoByteArray = BytesUtil.toByteArray(club.horario)
+        values.put(COL_ENCARGADO, encargadoByteArray)
         val ba = ByteArrayOutputStream()
         val oos = ObjectOutputStream(ba)
-        oos.writeObject(profesor.horario)
+        oos.writeObject(club.horario)
         val arrayBytes = ba.toByteArray()
         values.put(COL_HORARIO, arrayBytes)
-        return db.update(TABLE_NAME,values, "$COL_CARNE=?", arrayOf(profesor.nombre.toString()))
+        return db.update(TABLE_NAME,values, "$COL_NOMBRE=?", arrayOf(club.nombre.toString()))
 
     }
 
-    fun deleteProfesor(profesor: Profesor) {
+    fun deleteClub(club: Club) {
         val db: SQLiteDatabase = this.writableDatabase
-        db.delete(TABLE_NAME, "$COL_CARNE=?", arrayOf(profesor.nombre.toString()))
+        db.delete(TABLE_NAME, "$COL_NOMBRE=?", arrayOf(club.nombre.toString()))
         db.close()
     }
-
 }
