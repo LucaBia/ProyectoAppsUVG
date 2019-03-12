@@ -1,5 +1,6 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -8,10 +9,27 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import kotlinx.android.synthetic.main.activity_detalle_club.*
 import kotlinx.android.synthetic.main.app_bar_detalle_club.*
 
 class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    var clubBaloncesto: Club = Club("Baloncesto", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de baloncesto ...")
+    var clubFutbol: Club = Club("Fútbol", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de futbol ...")
+    var clubVoleibol: Club = Club("Voleibol", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de voleibol ...")
+    var clubAjedrez: Club = Club("Ajedrez", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de ajedrez ...")
+    var clubTenisMesa: Club = Club("Tenis de Mesa", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de tenis de mesa ...")
+    var clubAcondicionamientoFisi: Club = Club("Acondicionamiento Físico", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de acondicionamiento fisico ...")
+    var clubYoga: Club = Club("Yoga", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de yoga ...")
+    var clubCoro: Club = Club("Coro", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de coro ...")
+    var clubMarimba: Club = Club("Marimba", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de marimba ...")
+    var clubTeatro: Club = Club("Teatro", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de teatro ...")
+    var clubGuitarra: Club = Club("Guitarra", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de guitarra ...")
+    var clubDanza: Club = Club("Danza", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de danza ...")
+    var clubDebates: Club = Club("Debates", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de debates ...")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +48,8 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        
     }
 
     override fun onBackPressed() {
@@ -60,18 +80,24 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_horario -> {
-                // Handle the camera action
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_atencionProfesores -> {
-
+                val intent2 = Intent(this, ProfesoresActivity::class.java)
+                startActivity(intent2)
             }
             R.id.nav_tutorias -> {
-
+                val intent3 = Intent(this, TutoriasActivity::class.java)
+                startActivity(intent3)
             }
             R.id.nav_clubes -> {
-
+                val intent4 = Intent(this, ClubesActivity::class.java)
+                startActivity(intent4)
             }
             R.id.nav_biblioteca -> {
+                val intent5 = Intent(this, BibliotecaActivity::class.java)
+                startActivity(intent5)
 
             }
             R.id.nav_emergencia -> {

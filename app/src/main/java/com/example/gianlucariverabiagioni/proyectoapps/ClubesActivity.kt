@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import kotlinx.android.synthetic.main.activity_clubes.*
 import kotlinx.android.synthetic.main.app_bar_clubes.*
 
@@ -94,5 +95,11 @@ class ClubesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    fun metodoBaloncesto(view: View){
+        val intentRegresar = Intent(this, DetalleClubActivity::class.java)
+        startActivity(intentRegresar)
+
     }
 }
