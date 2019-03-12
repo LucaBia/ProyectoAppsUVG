@@ -11,11 +11,18 @@ class Horario{
         Periodo("12:20", "1:05")
     )
 
-    val lunes : List<Curso?> = ArrayList()
-    val martes : List<Curso?> = ArrayList()
-    val miercoles : List<Curso?> = ArrayList()
-    val jueves : List<Curso?> = ArrayList()
-    val viernes : List<Curso?> = ArrayList()
+    constructor(){
+        for (i in horas){
+            val lunes: Map<Periodo, Curso?> = hashMapOf( i to null)
+            val martes: Map<Periodo, Curso?> = hashMapOf( i to null)
+            val miercoles: Map<Periodo, Curso?> = hashMapOf( i to null)
+            val jueves: Map<Periodo, Curso?> = hashMapOf( i to null)
+            val viernes: Map<Periodo, Curso?> = hashMapOf( i to null)
+        }
+    }
+
+
+
 
 
 }
