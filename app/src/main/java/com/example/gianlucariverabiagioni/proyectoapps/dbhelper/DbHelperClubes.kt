@@ -25,6 +25,8 @@ class DbHelperClubes (context: Context): SQLiteOpenHelper(context, DATABASE_NAME
 
     }
 
+
+
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_HORARIO STRING, $COL_ENCARGADO TEXT, $COL_DESCRIPCION TEXT, $COL_HORARIO BLOB)")
         db!!.execSQL(CREATE_TABLE_QUERY)
