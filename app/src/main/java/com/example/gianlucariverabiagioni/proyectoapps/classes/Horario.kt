@@ -1,5 +1,8 @@
 package com.example.gianlucariverabiagioni.proyectoapps.classes
 
-class Horario {
+import java.io.Serializable
+
+
+class Horario: Serializable{
 
 }
