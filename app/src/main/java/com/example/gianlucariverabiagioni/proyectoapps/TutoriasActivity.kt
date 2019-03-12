@@ -1,7 +1,6 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -9,7 +8,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_tutorias.*
-import kotlinx.android.synthetic.main.app_bar_tutorias.*
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.support.v7.widget.DefaultItemAnimator
@@ -27,7 +25,6 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var recyclerView: RecyclerView? = null
     private var data: ArrayList<Estudiante>? = null
-    private var removedItems: ArrayList<Int>? = null
 
     companion object {
         @JvmStatic var myOnClickListener: View.OnClickListener? = null
@@ -36,15 +33,15 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorias)
-        setSupportActionBar(toolbar)
+        /*setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-        }
+        }*/
 
         val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+            this, drawer_layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()

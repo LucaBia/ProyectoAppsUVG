@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-    var telefonoEmergencia: Int =  111111
+    var telefonoEmergencia: Int =  59781736
     //var nw = findViewById<View>(R.id.nav_view) as NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
