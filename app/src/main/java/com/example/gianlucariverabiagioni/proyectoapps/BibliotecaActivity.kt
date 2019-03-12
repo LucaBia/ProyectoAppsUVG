@@ -23,7 +23,6 @@ class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_biblioteca)
-        setSupportActionBar(toolbar)
 
         val textAsunto = findViewById<TextView>(R.id.textAsunto)
         val textMensaje = findViewById<TextView>(R.id.textMensaje)
@@ -36,11 +35,6 @@ class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             sendEmail(correo,asunto,mensaje)
         }
 
-        val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        )
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
 
