@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:gravity="center_horizontal"
-              android:orientation="vertical"
-              android:paddingBottom="@dimen/activity_vertical_margin"
-              android:paddingLeft="@dimen/activity_horizontal_margin"
-              android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_vertical_margin"
-              tools:context=".LoginActivity">
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:gravity="center_horizontal"
+                                             android:orientation="vertical"
+                                             android:paddingBottom="@dimen/activity_vertical_margin"
+                                             android:paddingLeft="@dimen/activity_horizontal_margin"
+                                             android:paddingRight="@dimen/activity_horizontal_margin"
+                                             android:paddingTop="@dimen/activity_vertical_margin"
+                                             tools:context=".LoginActivity" android:background="@color/colorFondo">
 
     <!-- Login progress -->
     <ProgressBar
@@ -24,9 +25,14 @@
     <ScrollView
             android:id="@+id/login_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="1dp" android:layout_marginStart="1dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView4" app:layout_constraintEnd_toStartOf="@+id/imageView4"
+            android:layout_marginEnd="2dp" android:layout_marginRight="2dp"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+        <android.support.constraint.ConstraintLayout
                 android:id="@+id/email_login_form"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -34,7 +40,11 @@
 
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textInputLayout" app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginTop="212dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textInputLayout2">
 
                 <AutoCompleteTextView
                         android:id="@+id/email"
@@ -49,7 +59,12 @@
 
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="11dp" app:layout_constraintBottom_toTopOf="@+id/email_sign_in_button"
+                    android:id="@+id/textInputLayout2">
 
                 <EditText
                         android:id="@+id/password"
@@ -68,17 +83,49 @@
             <Button
                     android:text="Button"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" tools:layout_editor_absoluteY="296dp"
-                    tools:layout_editor_absoluteX="139dp" android:id="@+id/seguir"/>
+                    android:layout_height="wrap_content"
+                    android:id="@+id/seguir"
+                    app:layout_constraintTop_toBottomOf="@+id/email_sign_in_button"
+                    app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="132dp"
+                    android:layout_marginStart="132dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginEnd="132dp" android:layout_marginRight="132dp"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
             <Button
                     android:id="@+id/email_sign_in_button"
                     style="?android:textAppearanceSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
                     android:text="@string/action_sign_in"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" android:layout_marginTop="11dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+                    app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="36dp" app:layout_constraintBottom_toTopOf="@+id/seguir"/>
 
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
+    <ImageView
+            android:layout_width="372dp"
+            android:layout_height="209dp" app:srcCompat="@drawable/cit1"
+            android:id="@+id/imageView4" app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="16dp" android:layout_marginStart="16dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <ImageView
+            android:layout_width="125dp"
+            android:layout_height="125dp" app:srcCompat="@color/colorFondo"
+            android:id="@+id/imageView7"
+            app:layout_constraintTop_toBottomOf="@+id/login_form" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="750dp" app:layout_constraintStart_toEndOf="@+id/login_form"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="350dp"
+            android:layout_marginRight="350dp"/>
+    <ImageView
+            android:layout_width="124dp"
+            android:layout_height="124dp" app:srcCompat="@drawable/logo_vertical_blanco"
+            android:id="@+id/imageView8"
+            app:layout_constraintStart_toEndOf="@+id/login_form"
+            app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="350dp"
+            android:layout_marginRight="350dp"
+            app:layout_constraintTop_toBottomOf="@+id/login_form" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="750dp"/>
 </android.support.constraint.ConstraintLayout>
