@@ -14,8 +14,19 @@ object MyData {
         "Ice Cream Sandwich",
         "JellyBean",
         "Kitkat",
-        "Lollipop",
         "Marshmallow"
+    )
+    internal var carneArray = arrayOf(
+        "123456",
+        "123456",
+        "123456",
+        "123456",
+        "123456",
+        "123456",
+        "123456",
+        "123456",
+        "123456",
+        "123456"
     )
     internal var correoArray = arrayOf(
         "correo@uvg.edu.gt",
@@ -30,6 +41,19 @@ object MyData {
         "correo@uvg.edu.gt"
     )
 
+    internal var contrasenaArray = arrayOf(
+        "abcdef",
+        "abcdef",
+        "abcdef",
+        "abcdef",
+        "abcdef",
+        "abcdef",
+        "abcdef",
+        "abcdef",
+        "abcdef",
+        "abcdef"
+        )
+
     internal var drawableArray = arrayOf<Int>(
         R.drawable.ic_launcher,
         R.drawable.ic_launcher,
@@ -39,7 +63,6 @@ object MyData {
         R.drawable.ic_launcher,
         R.drawable.ic_launcher,
         R.drawable.cit1,
-        R.drawable.ic_launcher,
         R.drawable.ic_launcher,
         R.drawable.ic_launcher
     )

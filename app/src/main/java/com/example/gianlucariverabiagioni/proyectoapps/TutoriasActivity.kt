@@ -65,15 +65,13 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
             data!!.add(
                 Estudiante(
                     MyData.nameArray[i],
+                    MyData.carneArray[i],
                     MyData.correoArray[i],
-                    MyData.correoArray[i],
-                    MyData.correoArray[i],
+                    MyData.contrasenaArray[i],
                     Horario()
                 )
             )
         }
-
-        removedItems = ArrayList<Int>()
 
         adapter = EstudianteAdapter(data!!)
         recyclerView?.setAdapter(adapter)

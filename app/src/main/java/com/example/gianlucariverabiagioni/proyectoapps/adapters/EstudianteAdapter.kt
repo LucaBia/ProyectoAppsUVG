@@ -31,10 +31,7 @@ class EstudianteAdapter : RecyclerView.Adapter<EstudianteAdapter.EstudianteViewH
         this.dataSet = data
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): EstudianteViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EstudianteViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.estudiante_item, parent, false)
 
         view.setOnClickListener(TutoriasActivity.myOnClickListener)
