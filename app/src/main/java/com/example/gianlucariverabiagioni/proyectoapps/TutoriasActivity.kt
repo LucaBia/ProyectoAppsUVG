@@ -10,33 +10,28 @@ import android.view.Menu
 import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_tutorias.*
 import kotlinx.android.synthetic.main.app_bar_tutorias.*
-import android.R.attr.data
-import android.content.Context
-import android.widget.TextView
-import com.example.gianlucariverabiagioni.proyectoapps.R.id.recyclerView
 import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.example.gianlucariverabiagioni.proyectoapps.R.id.recyclerView
-import android.R.attr.data
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
-import com.example.gianlucariverabiagioni.proyectoapps.R.attr.layoutManager
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.EstudianteAdapter
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.MyData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
-
+import android.content.Context
+import android.widget.Toast
 
 class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
 
     private var adapter: RecyclerView.Adapter<*>? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var recyclerView: RecyclerView? = null
     private var data: ArrayList<Estudiante>? = null
-    var myOnClickListener: View.OnClickListener? = null
     private var removedItems: ArrayList<Int>? = null
 
+    companion object {
+        @JvmStatic var myOnClickListener: View.OnClickListener? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,13 +51,7 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         nav_view.setNavigationItemSelectedListener(this)
 
-
-
-
-
-
-
-        //myOnClickListener = MyOnClickListener(this)
+        myOnClickListener = MyOnClickListener(this)
 
         recyclerView = (findViewById(R.id.recyclerView) as RecyclerView)
         recyclerView!!.setHasFixedSize(true)
@@ -143,5 +132,12 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private class MyOnClickListener (private val context: Context) : View.OnClickListener {
+
+        override fun onClick(v: View) {
+            Toast.makeText(context, "Hola" , Toast.LENGTH_SHORT).show()
+        }
     }
 }

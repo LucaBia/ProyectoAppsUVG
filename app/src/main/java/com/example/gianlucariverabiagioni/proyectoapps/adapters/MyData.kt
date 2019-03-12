@@ -18,29 +18,30 @@ object MyData {
         "Marshmallow"
     )
     internal var correoArray = arrayOf(
-        "1.5",
-        "1.6",
-        "2.0-2.1",
-        "2.2-2.2.3",
-        "2.3-2.3.7",
-        "3.0-3.2.6",
-        "4.0-4.0.4",
-        "4.1-4.3.1",
-        "4.4-4.4.4",
-        "5.0-5.1.1",
-        "6.0-6.0.1"
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt",
+        "correo@uvg.edu.gt"
     )
 
     internal var drawableArray = arrayOf<Int>(
-        R.drawable.futbol,
-        R.drawable.logo_vertical_blanco,
-        R.drawable.futbol,
-        R.drawable.futbol,
-        R.drawable.futbol,
-        R.drawable.futbol,
-        R.drawable.futbol,
-        R.drawable.futbol,
-        R.drawable.futbol
+        R.drawable.ic_launcher,
+        R.drawable.ic_launcher,
+        R.drawable.ic_launcher,
+        R.drawable.ic_launcher,
+        R.drawable.ic_launcher,
+        R.drawable.ic_launcher,
+        R.drawable.ic_launcher,
+        R.drawable.cit1,
+        R.drawable.ic_launcher,
+        R.drawable.ic_launcher,
+        R.drawable.ic_launcher
     )
 
     internal var id_ = arrayOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)

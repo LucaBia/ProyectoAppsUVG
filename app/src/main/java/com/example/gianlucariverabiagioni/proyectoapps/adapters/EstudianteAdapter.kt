@@ -12,7 +12,7 @@ import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 
 
 class EstudianteAdapter : RecyclerView.Adapter<EstudianteAdapter.EstudianteViewHolder> {
-    private lateinit var dataSet: ArrayList<Estudiante>
+    private var dataSet: ArrayList<Estudiante>
 
     class EstudianteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -35,10 +35,9 @@ class EstudianteAdapter : RecyclerView.Adapter<EstudianteAdapter.EstudianteViewH
         parent: ViewGroup,
         viewType: Int
     ): EstudianteViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.estudiante_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.estudiante_item, parent, false)
 
-        //view.setOnClickListener(TutoriasActivity.myOnClickListener)
+        view.setOnClickListener(TutoriasActivity.myOnClickListener)
 
         return EstudianteViewHolder(view)
     }
