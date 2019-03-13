@@ -16,16 +16,13 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val miHorario : Horario = Horario()
     var telefonoEmergencia: Int =  59781736
-    //var nw = findViewById<View>(R.id.nav_view) as NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        //val nw = findViewById<View>(R.id.nav_view) as NavigationView
-        //nw.itemIconTintList = null
-        //setSupportActionBar(toolbar)
-
         modificar.setOnClickListener { view ->
+            //TODO
+            //val fragment = MainFragment()
 
         }
 
@@ -36,7 +33,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-        //nw.setItemIconTintList(null);
 
     }
 
