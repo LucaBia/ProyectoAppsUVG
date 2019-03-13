@@ -2,7 +2,7 @@ package com.example.gianlucariverabiagioni.proyectoapps.adapters
 
 import com.example.gianlucariverabiagioni.proyectoapps.R
 
-object MyData {
+object ProfesoresData {
 
     internal var nameArray = arrayOf(
         "Cupcake1",
@@ -52,7 +52,7 @@ object MyData {
         "abcdef8",
         "abcdef9",
         "abcdef10"
-        )
+    )
 
     internal var drawableArray = arrayOf<Int>(
         R.drawable.ic_launcher,
