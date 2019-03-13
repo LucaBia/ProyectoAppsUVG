@@ -9,12 +9,8 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.TextView
-import com.example.gianlucariverabiagioni.proyectoapps.adapters.ClubData
-import com.example.gianlucariverabiagioni.proyectoapps.adapters.MyData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
-import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import kotlinx.android.synthetic.main.activity_detalle_club.*
 import kotlinx.android.synthetic.main.app_bar_detalle_club.*
 

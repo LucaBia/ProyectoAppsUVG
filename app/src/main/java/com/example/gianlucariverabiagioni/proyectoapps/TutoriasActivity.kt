@@ -13,9 +13,8 @@ import android.view.View
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.EstudianteAdapter
-import com.example.gianlucariverabiagioni.proyectoapps.adapters.MyData
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.TutoresData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
-import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import android.content.Context
 import android.widget.Toast
 
@@ -58,13 +57,13 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         recyclerView!!.setItemAnimator(DefaultItemAnimator())
 
         data = ArrayList<Estudiante>()
-        for (i in 0 until MyData.nameArray.size) {
+        for (i in 0 until TutoresData.nameArray.size) {
             data!!.add(
                 Estudiante(
-                    MyData.nameArray[i],
-                    MyData.carneArray[i],
-                    MyData.correoArray[i],
-                    MyData.contrasenaArray[i]
+                    TutoresData.nameArray[i],
+                    TutoresData.carneArray[i],
+                    TutoresData.correoArray[i],
+                    TutoresData.contrasenaArray[i]
                 )
             )
         }
