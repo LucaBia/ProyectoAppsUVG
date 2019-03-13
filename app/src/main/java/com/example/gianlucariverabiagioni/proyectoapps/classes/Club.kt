@@ -1,10 +1,12 @@
 package com.example.gianlucariverabiagioni.proyectoapps.classes
 
 class Club {
-    var nombre: String
-    var horario: Horario
-    var encargado: Estudiante
-    var descripcion: String
+    lateinit var nombre: String
+    lateinit var horario: Horario
+    lateinit var encargado: Estudiante
+    lateinit var descripcion: String
+
+    constructor(){}
 
     constructor(nombre: String, horario: Horario, encargado: Estudiante, descripcion: String) {
         this.nombre = nombre

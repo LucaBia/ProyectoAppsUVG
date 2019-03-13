@@ -1,5 +1,6 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -10,10 +11,21 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.ClubData
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import kotlinx.android.synthetic.main.activity_clubes.*
 import kotlinx.android.synthetic.main.app_bar_clubes.*
+import android.widget.TextView
+
+
 
 class ClubesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
+    private var data: ArrayList<Club>? = null
+    //var nombre = findViewById<TextView>(R.id.tvNombre)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,9 +109,24 @@ class ClubesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         return true
     }
 
+    @SuppressLint("SetTextI18n")
     fun metodoBaloncesto(view: View){
-        val intentRegresar = Intent(this, DetalleClubActivity::class.java)
-        startActivity(intentRegresar)
+        //val nombreTextView = findViewById<TextView>(R.id.tvNombre)
+        val intentBaloncesto = Intent(this, DetalleClubActivity::class.java)
+        //intentBaloncesto.extras()
+
+        /*for (i in 0 until ClubData.nombreArray.size) {
+            data!!.add(
+                Club(
+                    ClubData.nombreArray[i],
+                    Horario(),
+                    Estudiante(),
+                    ClubData.descripcionArray[i]
+                )
+            )
+        }*/
+        //nombreTextView.setText("Maldita U");
+        startActivity(intentBaloncesto)
 
     }
 }

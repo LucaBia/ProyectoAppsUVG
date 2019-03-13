@@ -9,6 +9,9 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.ClubData
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.MyData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
@@ -17,8 +20,12 @@ import kotlinx.android.synthetic.main.app_bar_detalle_club.*
 
 class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var clubBaloncesto: Club = Club("Baloncesto", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de baloncesto ...")
-    var clubFutbol: Club = Club("Fútbol", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de futbol ...")
+    var club: Club = Club()
+    //var myAwesomeTextView = findViewById<TextView>(R.id.tvNombre)
+
+
+    //var clubBaloncesto: Club = Club("Baloncesto", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de baloncesto ...")
+    //var clubFutbol: Club = Club("Fútbol", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de futbol ...")
     var clubVoleibol: Club = Club("Voleibol", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de voleibol ...")
     var clubAjedrez: Club = Club("Ajedrez", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de ajedrez ...")
     var clubTenisMesa: Club = Club("Tenis de Mesa", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de tenis de mesa ...")
@@ -48,6 +55,8 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+
 
         
     }
