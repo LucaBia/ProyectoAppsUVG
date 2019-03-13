@@ -7,7 +7,7 @@ class Estudiante {
     var carne: String
     var correo: String
     var contrasena: String
-    var horario: HashMap<Int, Horario> = hashMapOf(1 to Horario())
+    var horario: Horario = Horario()
     var tutor: Boolean = false
     var image: Int = 0
 
@@ -18,7 +18,7 @@ class Estudiante {
         this.contrasena = password
     }
 
-    constructor(name: String, carne: String, email: String, password: String, horario: HashMap<Int, Horario>){
+    constructor(name: String, carne: String, email: String, password: String, horario: Horario){
         this.nombre = name
         this.carne = carne
         this.correo = email
