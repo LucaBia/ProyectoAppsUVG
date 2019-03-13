@@ -26,12 +26,13 @@ class DbHelperProfesores(context: Context): SQLiteOpenHelper(context, DATABASE_N
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_CORREO TEXT $COL_HORARIO BLOB)")
         db!!.execSQL(CREATE_TABLE_QUERY)
-        addProfesor(Profesor("Pedro Luis Alfonso Lopez", "palf@uvg.edu.gt"))
+        /*addProfesor(Profesor("Pedro Luis Alfonso Lopez", "palf@uvg.edu.gt"))
         addProfesor(Profesor("Diego Alejandro Enriquez Rodriguez", "dalef@uvg.edu.gt"))
         addProfesor(Profesor("Magda Fabiola Moscoso Arriola", "mmos@uvg.edu.gt"))
         addProfesor(Profesor("Zayda Rita Pérez Zubillaga", "zper@uvg.edu.gt"))
         addProfesor(Profesor("Martha Ligia Naranjo Franky", "mnar@uvg.edu.gt"))
         addProfesor(Profesor("Oscar Estuardo Gil Sanchez", "ogil@uvg.edu.gt"))
+        */
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

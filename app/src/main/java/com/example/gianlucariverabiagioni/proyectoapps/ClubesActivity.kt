@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Button
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.ClubData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
@@ -44,6 +45,72 @@ class ClubesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        val basquetButton = findViewById<Button>(R.id.btnBaloncesto)
+        basquetButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","baloncesto")
+            startActivity(intent) }
+        val futbolButton = findViewById<Button>(R.id.btnFutbol)
+        futbolButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","futbol")
+            startActivity(intent) }
+        val acondicionamientoButton = findViewById<Button>(R.id.btnAcondicionamiento)
+        acondicionamientoButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","acondicionamiento")
+            startActivity(intent) }
+        val ajedrezButton = findViewById<Button>(R.id.btnAjedrez)
+        ajedrezButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","ajedrez")
+            startActivity(intent) }
+        val coroButton = findViewById<Button>(R.id.btnCoro)
+        coroButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","coro")
+            startActivity(intent) }
+        val debateButton = findViewById<Button>(R.id.btnDebates)
+        debateButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","desbates")
+            startActivity(intent) }
+        val danzaButton = findViewById<Button>(R.id.btnDanza)
+        danzaButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","danza")
+            startActivity(intent) }
+        val guitarraButton = findViewById<Button>(R.id.btnGuitarra)
+        guitarraButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","guitarra")
+            startActivity(intent) }
+        val marimbaButton = findViewById<Button>(R.id.btnMarimba)
+        marimbaButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","marimba")
+            startActivity(intent) }
+        val teatroButton = findViewById<Button>(R.id.btnTeatro)
+        teatroButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","teatro")
+            startActivity(intent) }
+        val tenisButton = findViewById<Button>(R.id.btnTT)
+        tenisButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","tenis")
+            startActivity(intent) }
+        val voleibolButton = findViewById<Button>(R.id.btnVoleibol)
+        voleibolButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","voleibol")
+            startActivity(intent) }
+        val yogaButton = findViewById<Button>(R.id.btnYoga)
+        yogaButton.setOnClickListener {
+            val intent = Intent(this, DetalleClubActivity::class.java)
+            intent.putExtra("club","yoga")
+            startActivity(intent) }
     }
 
     override fun onBackPressed() {
