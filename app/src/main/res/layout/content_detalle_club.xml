@@ -18,10 +18,10 @@
             android:layout_marginStart="39dp" app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="6dp"/>
     <TextView
             android:text='"Nombre Club"'
-            android:layout_width="203dp"
-            android:layout_height="48dp"
-            android:id="@+id/tvNombre" android:textSize="30sp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="104dp" android:layout_marginStart="104dp" android:layout_marginTop="28dp"
+            android:layout_width="281dp"
+            android:layout_height="73dp"
+            android:id="@+id/tvNombre" android:textSize="28sp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="64dp" android:layout_marginStart="64dp" android:layout_marginTop="28dp"
             app:layout_constraintTop_toBottomOf="@+id/imageView2"/>
     <TextView
             android:text="   Horarios"
@@ -44,21 +44,14 @@
             android:id="@+id/tvHorarios" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="103dp"
             android:layout_marginStart="103dp" android:layout_marginTop="15dp"
             app:layout_constraintTop_toBottomOf="@+id/textView4" android:textSize="18sp"/>
-    <TextView
-            android:text="Inscríbete"
-            android:layout_width="wrap_content"
+    <Button
+            android:text="Inscribete"
+            android:layout_width="191dp"
             android:layout_height="wrap_content"
-            android:id="@+id/textView6" android:textSize="30sp" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginLeft="139dp" android:layout_marginStart="139dp" android:layout_marginTop="17dp"
-            app:layout_constraintTop_toBottomOf="@+id/tvHorarios"/>
-    <EditText
-            android:layout_width="261dp"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/mailText"
-            android:hint="Email:" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="75dp"
-            android:layout_marginStart="75dp" android:layout_marginTop="26dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" android:layout_marginBottom="49dp"
-            app:layout_constraintBottom_toBottomOf="parent" android:textColor="@color/colorText"/>
+            android:id="@+id/joinButton" app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="108dp"
+            android:layout_marginStart="108dp" android:layout_marginTop="52dp"
+            app:layout_constraintTop_toBottomOf="@+id/tvHorarios" android:layout_marginBottom="78dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:textSize="24sp"
+            app:layout_constraintVertical_bias="0.0"
+            android:background="@color/common_google_signin_btn_text_dark_focused"/>
 </android.support.constraint.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
@@ -42,10 +43,10 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_club)
         //setSupportActionBar(toolbar)
-        val textMail = findViewById<TextView>(R.id.mailText)
+        val joinButton = findViewById<Button>(R.id.joinButton)
 
-        fab.setOnClickListener { view ->
-            var correo =textMail.text.toString()
+        joinButton.setOnClickListener { view ->
+            var correo = "riv18049@uvg.edu.gt"
             var asunto:String = "Inscripcion del club"
             var mensaje:String = "Buen día, me gustaría inscribirme al club"
 
