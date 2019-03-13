@@ -13,10 +13,11 @@ import android.view.View
 import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.EstudianteAdapter
-import com.example.gianlucariverabiagioni.proyectoapps.adapters.MyData
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.TutoresData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
-import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.widget.Toast
 
 class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -25,6 +26,8 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var recyclerView: RecyclerView? = null
     private var data: ArrayList<Estudiante>? = null
+
+    var telefonoEmergencia: Int =  59781736
 
     companion object {
         @JvmStatic var myOnClickListener: View.OnClickListener? = null
@@ -58,13 +61,13 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         recyclerView!!.setItemAnimator(DefaultItemAnimator())
 
         data = ArrayList<Estudiante>()
-        for (i in 0 until MyData.nameArray.size) {
+        for (i in 0 until TutoresData.nameArray.size) {
             data!!.add(
                 Estudiante(
-                    MyData.nameArray[i],
-                    MyData.carneArray[i],
-                    MyData.correoArray[i],
-                    MyData.contrasenaArray[i]
+                    TutoresData.nameArray[i],
+                    TutoresData.carneArray[i],
+                    TutoresData.correoArray[i],
+                    TutoresData.contrasenaArray[i]
                 )
             )
         }
@@ -102,22 +105,33 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_horario -> {
-                // Handle the camera action
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
             }
             R.id.nav_atencionProfesores -> {
+                val intent2 = Intent(this, ProfesoresActivity::class.java)
+                startActivity(intent2)
 
             }
             R.id.nav_tutorias -> {
+                val intent3 = Intent(this, TutoriasActivity::class.java)
+                startActivity(intent3)
 
             }
             R.id.nav_clubes -> {
+                val intent4 = Intent(this, ClubesActivity::class.java)
+                startActivity(intent4)
 
             }
             R.id.nav_biblioteca -> {
+                val intent5 = Intent(this, BibliotecaActivity::class.java)
+                startActivity(intent5)
 
             }
             R.id.nav_emergencia -> {
-
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:"+telefonoEmergencia)
+                startActivity(intent)
             }
             R.id.nav_configuracion -> {
 
