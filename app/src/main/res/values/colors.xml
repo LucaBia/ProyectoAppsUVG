@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#d81b60</color>
     <color name="colorFondo">#0e5430</color>
-    <color name="navigation_drawer_icon">#9e000000</color>
+    <color name="colorFondo2">#c00e5430</color>
+    <color name="navigation_drawer_icon">#a7000000</color>
     <color name="colorBackground">#413e4f</color>
     <color name="colorText">#FFFFFF</color>
     <color name="colorTextHint">#51d8c7</color>
