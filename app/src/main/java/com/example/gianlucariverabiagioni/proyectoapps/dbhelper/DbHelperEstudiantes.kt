@@ -28,7 +28,7 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_CARNE STRING, $COL_CORREO TEXT, $COL_CONTRASENA TEXT, $COL_HORARIO BLOB, $COL_TUTOR TEXT )")
+        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_CARNE STRING, $COL_CORREO TEXT, $COL_CONTRASENA TEXT, $COL_HORARIO TEXT, $COL_TUTOR TEXT )")
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
 
@@ -52,9 +52,10 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
                     val carne = cursor.getString(cursor.getColumnIndex(COL_CARNE))
                     val correo = cursor.getString(cursor.getColumnIndex(COL_CORREO))
                     val contrasena = cursor.getString(cursor.getColumnIndex(COL_CONTRASENA))
-                    val horarioByteArray = cursor.getBlob(cursor.getColumnIndex(COL_HORARIO))
-                    val horario = BytesUtil.toObject(horarioByteArray) as Horario
-                    val estudiante = Estudiante(nombre, carne, correo, contrasena, horario)
+                    //val horarioByteArray = cursor.getBlob(cursor.getColumnIndex(COL_HORARIO))
+                    //val horario = BytesUtil.toObject(horarioByteArray) as Horario
+                    val horario = cursor.getString(cursor.getString(cursor.getColumnIndex(COL_HORARIO)).toInt())
+                    val estudiante = Estudiante(nombre, carne, correo, contrasena)
 
                     lstEstudiantes.add(estudiante)
                 } while (cursor.moveToNext())
@@ -70,8 +71,10 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
         values.put(COL_CARNE, estudiante.carne)
         values.put(COL_CORREO, estudiante.correo)
         values.put(COL_CONTRASENA, estudiante.contrasena)
-        val horarioByteArray = BytesUtil.toByteArray(estudiante.horario)
-        values.put(COL_HORARIO, horarioByteArray)
+        //val horarioByteArray = BytesUtil.toByteArray(estudiante.horario)
+        //values.put(COL_HORARIO, horarioByteArray)
+        val horarioString = estudiante.horario.toString()
+        values.put(COL_HORARIO, horarioString)
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
@@ -80,8 +83,10 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
         val db: SQLiteDatabase = this.writableDatabase
         val values = ContentValues()
         values.put(COL_CONTRASENA, estudiante.contrasena)
-        val horarioByteArray = BytesUtil.toByteArray(estudiante.horario)
-        values.put(COL_HORARIO, horarioByteArray)
+        //val horarioByteArray = BytesUtil.toByteArray(estudiante.horario)
+        //values.put(COL_HORARIO, horarioByteArray)
+        val horarioString = estudiante.horario.toString()
+        values.put(COL_HORARIO, horarioString)
         return db.update(TABLE_NAME,values, "$COL_CARNE=?", arrayOf(estudiante.carne.toString()))
 
     }
@@ -92,4 +97,16 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
         db.close()
     }
 
+    fun checkUser(email: String, password: String): Boolean {
+        for (i in this.allEstudiantes) {
+            if (i.correo == email) {
+                if (i.contrasena == password) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
 }
+

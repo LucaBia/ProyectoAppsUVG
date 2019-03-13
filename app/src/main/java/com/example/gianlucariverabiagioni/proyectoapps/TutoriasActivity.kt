@@ -64,8 +64,7 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                     MyData.nameArray[i],
                     MyData.carneArray[i],
                     MyData.correoArray[i],
-                    MyData.contrasenaArray[i],
-                    Horario()
+                    MyData.contrasenaArray[i]
                 )
             )
         }

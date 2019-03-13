@@ -30,19 +30,19 @@ class DbHelperClubes (context: Context): SQLiteOpenHelper(context, DATABASE_NAME
     override fun onCreate(db: SQLiteDatabase?) {
         val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_HORARIO STRING, $COL_ENCARGADO TEXT, $COL_DESCRIPCION TEXT, $COL_HORARIO BLOB)")
         db!!.execSQL(CREATE_TABLE_QUERY)
-        addClub(Club("Baloncesto", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de baloncesto ..."))
-        addClub(Club("Fútbol", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de futbol ..."))
-        addClub(Club("Voleibol", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de voleibol ..."))
-        addClub(Club("Ajedrez", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de ajedrez ..."))
-        addClub(Club("Tenis de Mesa", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de tenis de mesa ..."))
-        addClub(Club("Acondicionamiento Físico", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de acondicionamiento fisico ..."))
-        addClub(Club("Yoga", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de yoga ..."))
-        addClub(Club("Coro", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de coro ..."))
-        addClub(Club("Marimba", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de marimba ..."))
-        addClub(Club("Teatro", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de teatro ..."))
-        addClub(Club("Guitarra", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de guitarra ..."))
-        addClub(Club("Danza", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de danza ..."))
-        addClub(Club("Debates", Horario(), Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123", Horario()), "El club de debates ..."))
+        addClub(Club("Baloncesto", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123" ), "El club de baloncesto ..."))
+        addClub(Club("Fútbol", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de futbol ..."))
+        addClub(Club("Voleibol", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de voleibol ..."))
+        addClub(Club("Ajedrez", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de ajedrez ..."))
+        addClub(Club("Tenis de Mesa", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de tenis de mesa ..."))
+        addClub(Club("Acondicionamiento Físico", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de acondicionamiento fisico ..."))
+        addClub(Club("Yoga", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de yoga ..."))
+        addClub(Club("Coro", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de coro ..."))
+        addClub(Club("Marimba", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de marimba ..."))
+        addClub(Club("Teatro", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de teatro ..."))
+        addClub(Club("Guitarra", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de guitarra ..."))
+        addClub(Club("Danza", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de danza ..."))
+        addClub(Club("Debates", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de debates ..."))
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
@@ -67,7 +67,7 @@ class DbHelperClubes (context: Context): SQLiteOpenHelper(context, DATABASE_NAME
                     val horarioByteArray = cursor.getBlob(cursor.getColumnIndex(COL_HORARIO))
                     val encargado = BytesUtil.toObject(encargadoByteArray) as Estudiante
                     val horario = BytesUtil.toObject(horarioByteArray) as Horario
-                    val club = Club(nombre, horario, encargado, descripcion)
+                    val club = Club(nombre, encargado, descripcion)
 
                     lstClubs.add(club)
                 } while (cursor.moveToNext())
