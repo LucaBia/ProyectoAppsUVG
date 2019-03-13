@@ -1,41 +1,24 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_tutorias.*
-import android.support.v7.widget.RecyclerView
-import android.view.View
-import android.support.v7.widget.DefaultItemAnimator
-import android.support.v7.widget.LinearLayoutManager
-import com.example.gianlucariverabiagioni.proyectoapps.adapters.EstudianteAdapter
-import com.example.gianlucariverabiagioni.proyectoapps.adapters.TutoresData
-import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_configuracion.*
+import kotlinx.android.synthetic.main.app_bar_configuracion.*
 
-class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    private var adapter: RecyclerView.Adapter<*>? = null
-    private var layoutManager: RecyclerView.LayoutManager? = null
-    private var recyclerView: RecyclerView? = null
-    private var data: ArrayList<Estudiante>? = null
-
+class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var telefonoEmergencia: Int =  59781736
-
-    companion object {
-        @JvmStatic var myOnClickListener: View.OnClickListener? = null
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_tutorias)
+        setContentView(R.layout.activity_configuracion)
         /*setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
@@ -50,31 +33,6 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-
-        myOnClickListener = MyOnClickListener(this)
-
-        recyclerView = (findViewById(R.id.recyclerView) as RecyclerView)
-        recyclerView!!.setHasFixedSize(true)
-
-        layoutManager = LinearLayoutManager(this)
-        recyclerView!!.setLayoutManager(layoutManager)
-        recyclerView!!.setItemAnimator(DefaultItemAnimator())
-
-        data = ArrayList<Estudiante>()
-        for (i in 0 until TutoresData.nameArray.size) {
-            data!!.add(
-                Estudiante(
-                    TutoresData.nameArray[i],
-                    TutoresData.carneArray[i],
-                    TutoresData.correoArray[i],
-                    TutoresData.contrasenaArray[i]
-                )
-            )
-        }
-
-        adapter = EstudianteAdapter(data!!)
-        recyclerView?.setAdapter(adapter)
-
     }
 
     override fun onBackPressed() {
@@ -87,7 +45,7 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.tutorias, menu)
+        menuInflater.inflate(R.menu.configuracion, menu)
         return true
     }
 
@@ -141,12 +99,5 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-    }
-
-    private class MyOnClickListener (private val context: Context) : View.OnClickListener {
-
-        override fun onClick(v: View) {
-            Toast.makeText(context, "Hola" , Toast.LENGTH_SHORT).show()
-        }
     }
 }

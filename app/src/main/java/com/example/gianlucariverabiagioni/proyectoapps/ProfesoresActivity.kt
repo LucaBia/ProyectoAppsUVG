@@ -130,7 +130,8 @@ class ProfesoresActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 startActivity(intent)
             }
             R.id.nav_configuracion -> {
-
+                val intent6 = Intent(this, ConfiguracionActivity::class.java)
+                startActivity(intent6)
             }
         }
 

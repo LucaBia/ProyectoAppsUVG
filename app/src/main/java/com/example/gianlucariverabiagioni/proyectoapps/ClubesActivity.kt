@@ -168,7 +168,8 @@ class ClubesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
 
             }
             R.id.nav_configuracion -> {
-
+                val intent6 = Intent(this, ConfiguracionActivity::class.java)
+                startActivity(intent6)
             }
         }
 

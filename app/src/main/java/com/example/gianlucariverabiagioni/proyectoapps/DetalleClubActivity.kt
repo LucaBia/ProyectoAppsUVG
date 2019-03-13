@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.app_bar_detalle_club.*
 import kotlinx.android.synthetic.main.content_detalle_club.*
 
 class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    var telefonoEmergencia: Int =  59781736
     var club: Club = Club()
     //var myAwesomeTextView = findViewById<TextView>(R.id.tvNombre)
 
@@ -188,10 +188,13 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
             }
             R.id.nav_emergencia -> {
-
+                val intent = Intent(Intent.ACTION_DIAL)
+                intent.data = Uri.parse("tel:"+telefonoEmergencia)
+                startActivity(intent)
             }
             R.id.nav_configuracion -> {
-
+                val intent6 = Intent(this, ConfiguracionActivity::class.java)
+                startActivity(intent6)
             }
         }
 
