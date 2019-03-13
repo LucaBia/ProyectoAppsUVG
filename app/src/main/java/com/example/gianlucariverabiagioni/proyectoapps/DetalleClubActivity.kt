@@ -15,6 +15,7 @@ import com.example.gianlucariverabiagioni.proyectoapps.adapters.MyData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
+import com.github.kittinunf.fuel.core.interceptors.validatorResponseInterceptor
 import kotlinx.android.synthetic.main.activity_detalle_club.*
 import kotlinx.android.synthetic.main.app_bar_detalle_club.*
 
@@ -55,11 +56,119 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
-
-
+        var tvNombre = findViewById<TextView>(R.id.tvNombre)
+        var tvDescripcion = findViewById<TextView>(R.id.tvDescripcion)
+        var clubText = intent.extras.getString("club")
+        if (clubText == "baloncesto"){
+            tvNombre.text = clubBaloncesto.nombre
+            tvDescripcion.text = clubBaloncesto.descripcion
+        }
+        if (clubText == "futbol"){
+            tvNombre.text = clubFutbol.nombre
+            tvDescripcion.text = clubFutbol.descripcion
+        }
+        if (clubText == "acondicionamiento"){
+            tvNombre.text = clubAcondicionamientoFisi.nombre
+            tvDescripcion.text = clubAcondicionamientoFisi.descripcion
+        }
+        if (clubText == "ajedrez"){
+            tvNombre.text = clubAjedrez.nombre
+            tvDescripcion.text = clubAjedrez.descripcion
+        }
+        if (clubText == "coro"){
+            tvNombre.text = clubCoro.nombre
+            tvDescripcion.text = clubCoro.descripcion
+        }
+        if (clubText == "danza"){
+            tvNombre.text = clubDanza.nombre
+            tvDescripcion.text = clubDanza.descripcion
+        }
+        if (clubText == "debates"){
+            tvNombre.text = clubDebates.nombre
+            tvDescripcion.text = clubDebates.descripcion
+        }
+        if (clubText == "guitarra"){
+            tvNombre.text = clubGuitarra.nombre
+            tvDescripcion.text = clubGuitarra.descripcion
+        }
+        if (clubText == "marimba"){
+            tvNombre.text = clubMarimba.nombre
+            tvDescripcion.text = clubMarimba.descripcion
+        }
+        if (clubText == "teatro"){
+            tvNombre.text = clubTeatro.nombre
+            tvDescripcion.text = clubTeatro.descripcion
+        }
+        if (clubText == "tenis"){
+            tvNombre.text = clubTenisMesa.nombre
+            tvDescripcion.text = clubTenisMesa.descripcion
+        }
+        if (clubText == "voleibol"){
+            tvNombre.text = clubVoleibol.nombre
+            tvDescripcion.text = clubVoleibol.descripcion
+        }
+        if (clubText == "yoga"){
+            tvNombre.text = clubYoga.nombre
+            tvDescripcion.text = clubYoga.descripcion
+        }
 
         
     }
+
+    /*fun setClub (clubText:String){
+        if (clubText == "baloncesto"){
+            tvNombre.text = clubBaloncesto.nombre
+            tvDescripcion.text = clubBaloncesto.descripcion
+        }
+        if (clubText == "futbol"){
+            tvNombre.text = clubFutbol.nombre
+            tvDescripcion.text = clubFutbol.descripcion
+        }
+        if (clubText == "acondicionamiento"){
+            tvNombre.text = clubAcondicionamientoFisi.nombre
+            tvDescripcion.text = clubAcondicionamientoFisi.descripcion
+        }
+        if (clubText == "ajedrez"){
+            tvNombre.text = clubAjedrez.nombre
+            tvDescripcion.text = clubAjedrez.descripcion
+        }
+        if (clubText == "coro"){
+            tvNombre.text = clubCoro.nombre
+            tvDescripcion.text = clubCoro.descripcion
+        }
+        if (clubText == "danza"){
+            tvNombre.text = clubDanza.nombre
+            tvDescripcion.text = clubDanza.descripcion
+        }
+        if (clubText == "debates"){
+            tvNombre.text = clubDebates.nombre
+            tvDescripcion.text = clubDebates.descripcion
+        }
+        if (clubText == "guitarra"){
+            tvNombre.text = clubGuitarra.nombre
+            tvDescripcion.text = clubGuitarra.descripcion
+        }
+        if (clubText == "marimba"){
+            tvNombre.text = clubMarimba.nombre
+            tvDescripcion.text = clubMarimba.descripcion
+        }
+        if (clubText == "teatro"){
+            tvNombre.text = clubTeatro.nombre
+            tvDescripcion.text = clubTeatro.descripcion
+        }
+        if (clubText == "tenis"){
+            tvNombre.text = clubTenisMesa.nombre
+            tvDescripcion.text = clubTenisMesa.descripcion
+        }
+        if (clubText == "voleibol"){
+            tvNombre.text = clubVoleibol.nombre
+            tvDescripcion.text = clubVoleibol.descripcion
+        }
+        if (clubText == "yoga"){
+            tvNombre.text = clubYoga.nombre
+            tvDescripcion.text = clubYoga.descripcion
+        }
+    }*/
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
