@@ -7,7 +7,7 @@ class Estudiante {
     var carne: String
     var correo: String
     var contrasena: String
-    var horario: Horario = Horario()
+    var horario: Horario
     var tutor: Boolean = false
     var image: Int = 0
 
@@ -16,6 +16,7 @@ class Estudiante {
         this.carne = carne
         this.correo = email
         this.contrasena = password
+        this.horario = Horario()
     }
 
     constructor(name: String, carne: String, email: String, password: String, horario: Horario){

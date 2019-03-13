@@ -31,7 +31,8 @@
                 android:text="Nombre"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:layout_alignParentRight="true"
-                android:layout_toLeftOf="@id/image_view"/>
+                android:layout_toLeftOf="@id/image_view"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"/>
 
         <TextView
                 android:id="@+id/text_view_correo"
@@ -39,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/text_view_nombre"
                 android:layout_alignParentRight="true"
-                android:text="Curso"/>
+                android:text="Curso" android:textColor="@color/common_google_signin_btn_text_dark_focused"/>
 
     </RelativeLayout>
 

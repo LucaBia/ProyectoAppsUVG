@@ -7,10 +7,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
-import com.example.gianlucariverabiagioni.proyectoapps.dbhelper.BytesUtil.toObject
 import com.google.gson.Gson
-import java.io.ByteArrayOutputStream
-import java.io.ObjectOutputStream
 
 class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VER) {
 
@@ -32,7 +29,7 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_CARNE STRING, $COL_CORREO TEXT, $COL_CONTRASENA TEXT, $COL_HORARIO TEXT, $COL_TUTOR TEXT )")
+        val CREATE_TABLE_QUERY: String = ("CREATE TABLE $TABLE_NAME ($COL_NOMBRE TEXT, $COL_CARNE STRING, $COL_CORREO TEXT, $COL_CONTRASENA TEXT, $COL_HORARIO BLOB, $COL_TUTOR TEXT )")
         db!!.execSQL(CREATE_TABLE_QUERY)
     }
 
@@ -58,9 +55,10 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
                     val contrasena = cursor.getString(cursor.getColumnIndex(COL_CONTRASENA))
                     //val horarioByteArray = cursor.getBlob(cursor.getColumnIndex(COL_HORARIO))
                     //val horario = BytesUtil.toObject(horarioByteArray) as Horario
-                    val horarioJson = cursor.getString(cursor.getString(cursor.getColumnIndex(COL_HORARIO)).toInt())
-                    val horario: Horario = gson.fromJson(horarioJson, Horario.class)
-                    val estudiante = Estudiante(nombre, carne, correo, contrasena, horario)
+
+                    //val horarioJson = cursor.getString(cursor.getString(cursor.getColumnIndex(COL_HORARIO)).toInt())
+                    //val horario: Horario = gson.fromJson(horarioJson, Horario::class.java)
+                    val estudiante = Estudiante(nombre, carne, correo, contrasena)
 
                     lstEstudiantes.add(estudiante)
                 } while (cursor.moveToNext())
@@ -78,10 +76,10 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
         values.put(COL_CONTRASENA, estudiante.contrasena)
         //val horarioByteArray = BytesUtil.toByteArray(estudiante.horario)
         //values.put(COL_HORARIO, horarioByteArray)
-        //val horarioString = estudiante.horario.toString()
+
         val horario = estudiante.horario
         val json = gson.toJson(horario)
-        values.put(COL_HORARIO, json)
+        //values.put(COL_HORARIO, json)
         db.insert(TABLE_NAME, null, values)
         db.close()
     }
@@ -92,10 +90,10 @@ class DbHelperEstudiantes(context: Context): SQLiteOpenHelper(context, DATABASE_
         values.put(COL_CONTRASENA, estudiante.contrasena)
         //val horarioByteArray = BytesUtil.toByteArray(estudiante.horario)
         //values.put(COL_HORARIO, horarioByteArray)
-        //val horarioString = estudiante.horario.toString()
+
         val horario = estudiante.horario
         val json = gson.toJson(horario)
-        values.put(COL_HORARIO, json)
+        //values.put(COL_HORARIO, json)
         return db.update(TABLE_NAME,values, "$COL_CARNE=?", arrayOf(estudiante.carne.toString()))
 
     }

@@ -17,7 +17,7 @@ class Horario{
     lateinit var jueves: Map<Periodo, Curso?>
     lateinit var viernes: Map<Periodo, Curso?>
 
-    constructor(){
+    init {
         for (i in horas){
             this.lunes = hashMapOf( i to null)
             this.martes = hashMapOf( i to null)
