@@ -1,11 +1,8 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
-<<<<<<< HEAD
 import android.content.Intent
 import android.net.Uri
-=======
 import android.content.Context
->>>>>>> 48621d74214246558a062430b4e93d5fdc037073
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
