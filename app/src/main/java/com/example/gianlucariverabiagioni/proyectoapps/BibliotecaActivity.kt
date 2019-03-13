@@ -24,13 +24,13 @@ class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_biblioteca)
 
-        val textAsunto = findViewById<TextView>(R.id.textAsunto)
+
         val textMensaje = findViewById<TextView>(R.id.textMensaje)
 
         mail.setOnClickListener { view ->
             var correo = "cas18040@uvg.edu.gt"
-            var asunto:String = textAsunto.text.toString()
-            var mensaje:String = textMensaje.text.toString()
+            var asunto:String = "Reserva de libro"
+            var mensaje:String = "Buen día, me gustaría reservar el libro: "+textMensaje.text.toString()
 
             sendEmail(correo,asunto,mensaje)
         }
