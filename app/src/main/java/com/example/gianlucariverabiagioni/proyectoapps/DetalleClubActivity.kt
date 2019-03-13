@@ -1,6 +1,7 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -10,10 +11,12 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import kotlinx.android.synthetic.main.activity_detalle_club.*
 import kotlinx.android.synthetic.main.app_bar_detalle_club.*
+import kotlinx.android.synthetic.main.content_detalle_club.*
 
 class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -38,12 +41,17 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_club)
-        /*setSupportActionBar(toolbar)
+        //setSupportActionBar(toolbar)
+        val textMail = findViewById<TextView>(R.id.mailText)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }*/
+            var correo =textMail.text.toString()
+            var asunto:String = "Inscripcion del club"
+            var mensaje:String = "Buen día, me gustaría inscribirme al club"
+
+            sendEmail(correo,asunto,mensaje)
+
+        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -111,60 +119,24 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         
     }
 
-    /*fun setClub (clubText:String){
-        if (clubText == "baloncesto"){
-            tvNombre.text = clubBaloncesto.nombre
-            tvDescripcion.text = clubBaloncesto.descripcion
+    private fun sendEmail(correo: String, asunto: String, message: String){
+        val mIntent = Intent(Intent.ACTION_SEND)
+        mIntent.data = Uri.parse("mailto:")
+        mIntent.type = "text/plain"
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(correo))
+        mIntent.putExtra(Intent.EXTRA_SUBJECT, asunto)
+        mIntent.putExtra(Intent.EXTRA_TEXT, message)
+
+        try {
+            startActivity(Intent.createChooser(mIntent, "Choose email client..."))
+
         }
-        if (clubText == "futbol"){
-            tvNombre.text = clubFutbol.nombre
-            tvDescripcion.text = clubFutbol.descripcion
+        catch (e: Exception){
+            //Si no funciona
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
-        if (clubText == "acondicionamiento"){
-            tvNombre.text = clubAcondicionamientoFisi.nombre
-            tvDescripcion.text = clubAcondicionamientoFisi.descripcion
-        }
-        if (clubText == "ajedrez"){
-            tvNombre.text = clubAjedrez.nombre
-            tvDescripcion.text = clubAjedrez.descripcion
-        }
-        if (clubText == "coro"){
-            tvNombre.text = clubCoro.nombre
-            tvDescripcion.text = clubCoro.descripcion
-        }
-        if (clubText == "danza"){
-            tvNombre.text = clubDanza.nombre
-            tvDescripcion.text = clubDanza.descripcion
-        }
-        if (clubText == "debates"){
-            tvNombre.text = clubDebates.nombre
-            tvDescripcion.text = clubDebates.descripcion
-        }
-        if (clubText == "guitarra"){
-            tvNombre.text = clubGuitarra.nombre
-            tvDescripcion.text = clubGuitarra.descripcion
-        }
-        if (clubText == "marimba"){
-            tvNombre.text = clubMarimba.nombre
-            tvDescripcion.text = clubMarimba.descripcion
-        }
-        if (clubText == "teatro"){
-            tvNombre.text = clubTeatro.nombre
-            tvDescripcion.text = clubTeatro.descripcion
-        }
-        if (clubText == "tenis"){
-            tvNombre.text = clubTenisMesa.nombre
-            tvDescripcion.text = clubTenisMesa.descripcion
-        }
-        if (clubText == "voleibol"){
-            tvNombre.text = clubVoleibol.nombre
-            tvDescripcion.text = clubVoleibol.descripcion
-        }
-        if (clubText == "yoga"){
-            tvNombre.text = clubYoga.nombre
-            tvDescripcion.text = clubYoga.descripcion
-        }
-    }*/
+    }
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {

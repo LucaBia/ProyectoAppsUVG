@@ -22,7 +22,7 @@
 
         <ImageView
                 android:layout_width="344dp"
-                android:layout_height="247dp" app:srcCompat="@color/navigation_drawer_icon"
+                android:layout_height="247dp" app:srcCompat="@color/colorFondo"
                 android:id="@+id/imageView7"
                 app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintHorizontal_bias="0.0" android:layout_marginTop="235dp"
