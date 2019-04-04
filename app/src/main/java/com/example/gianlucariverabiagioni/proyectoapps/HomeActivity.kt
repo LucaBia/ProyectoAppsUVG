@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     val miHorario : Horario = Horario()
     var telefonoEmergencia: Int =  59781736
+    private var mDrawerLayout: DrawerLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,41 +66,46 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_horario -> {
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
+                mDrawerLayout?.closeDrawers()
             }
             R.id.nav_atencionProfesores -> {
                 val intent2 = Intent(this, ProfesoresActivity::class.java)
                 startActivity(intent2)
+                finish()
 
             }
             R.id.nav_tutorias -> {
                 val intent3 = Intent(this, TutoriasActivity::class.java)
                 startActivity(intent3)
+                finish()
 
             }
             R.id.nav_clubes -> {
                 val intent4 = Intent(this, ClubesActivity::class.java)
                 startActivity(intent4)
-
+                finish()
             }
             R.id.nav_biblioteca -> {
                 val intent5 = Intent(this, BibliotecaActivity::class.java)
                 startActivity(intent5)
+                finish()
 
             }
             R.id.nav_emergencia -> {
                 val intent = Intent(Intent.ACTION_DIAL)
                 intent.data = Uri.parse("tel:"+telefonoEmergencia)
                 startActivity(intent)
+
             }
             R.id.nav_configuracion -> {
                 val intent6 = Intent(this, ConfiguracionActivity::class.java)
                 startActivity(intent6)
+                finish()
             }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+
 }

@@ -19,6 +19,9 @@ import com.example.gianlucariverabiagioni.proyectoapps.adapters.ProfesorAdapter
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.ProfesoresData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Profesor
 import kotlinx.android.synthetic.main.activity_profesores.*
+import android.support.v4.widget.DrawerLayout
+import android.view.Gravity
+
 
 class ProfesoresActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var telefonoEmergencia: Int =  59781736
@@ -27,6 +30,7 @@ class ProfesoresActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var recyclerView: RecyclerView? = null
     private var data: ArrayList<Profesor>? = null
+    private var mDrawerLayout: DrawerLayout? = null
 
     companion object {
         @JvmStatic var myOnClickListener: View.OnClickListener? = null
@@ -105,8 +109,7 @@ class ProfesoresActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 startActivity(intent)
             }
             R.id.nav_atencionProfesores -> {
-                val intent2 = Intent(this, ProfesoresActivity::class.java)
-                startActivity(intent2)
+                mDrawerLayout?.closeDrawers()
 
             }
             R.id.nav_tutorias -> {

@@ -18,6 +18,7 @@ import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.support.v4.widget.DrawerLayout
 import android.widget.Toast
 
 class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +27,7 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var recyclerView: RecyclerView? = null
     private var data: ArrayList<Estudiante>? = null
+    private var mDrawerLayout: DrawerLayout? = null
 
     var telefonoEmergencia: Int =  59781736
 
@@ -114,8 +116,7 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
             }
             R.id.nav_tutorias -> {
-                val intent3 = Intent(this, TutoriasActivity::class.java)
-                startActivity(intent3)
+                mDrawerLayout?.closeDrawers()
 
             }
             R.id.nav_clubes -> {

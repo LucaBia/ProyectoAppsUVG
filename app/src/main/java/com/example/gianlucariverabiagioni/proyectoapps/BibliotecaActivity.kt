@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.app_bar_biblioteca.*
 
 class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var telefonoEmergencia: Int =  59781736
+    private var mDrawerLayout: DrawerLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -115,8 +117,7 @@ class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
             }
             R.id.nav_biblioteca -> {
-                val intent5 = Intent(this, BibliotecaActivity::class.java)
-                startActivity(intent5)
+                mDrawerLayout?.closeDrawers()
 
             }
             R.id.nav_emergencia -> {
