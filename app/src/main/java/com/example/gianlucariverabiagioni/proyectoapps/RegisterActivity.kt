@@ -179,7 +179,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     verifyEmail(user)
 
                     val usuario = Estudiante(name, carne, email, password).toMap()
-                    db.collection("Users")
+                    db.collection("Estudiantes")
                         .add(usuario)
                         .addOnSuccessListener { documentReference ->
                             emptyInputEditText()
