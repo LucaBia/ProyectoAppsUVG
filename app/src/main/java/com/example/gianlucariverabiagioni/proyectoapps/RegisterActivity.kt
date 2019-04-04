@@ -1,5 +1,6 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.TextInputEditText
@@ -191,6 +192,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                             // Snack Bar to show error message that record already exists
                             Snackbar.make(nestedScrollView!!, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show()
                         }
+
+                    startActivity(Intent(this, LoginActivity::class.java))
                 }
             }
     }
@@ -210,8 +213,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             ?.addOnCompleteListener(this) {
                     task ->
 
-                if (task.isComplete){
-                    //finish()
+                if (task.isComplete) {
                     Toast.makeText(this, "Enviado correctamente", Toast.LENGTH_LONG).show()
                 } else {
                     Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_LONG).show()

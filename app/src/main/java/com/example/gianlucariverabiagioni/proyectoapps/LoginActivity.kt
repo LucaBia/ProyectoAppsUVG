@@ -61,6 +61,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
         onClick(appCompatButtonLogin)
 
+        auth= FirebaseAuth.getInstance()
+
     }
 
     /**
