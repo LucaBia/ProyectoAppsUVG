@@ -9,11 +9,15 @@ import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.AppCompatTextView
+import android.text.TextUtils
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 
 
 import com.example.gianlucariverabiagioni.proyectoapps.classes.InputValidation
-import com.example.gianlucariverabiagioni.proyectoapps.dbhelper.DbHelperEstudiantes
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
@@ -33,7 +37,10 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var textViewLinkRegister: AppCompatTextView
 
     private lateinit var inputValidation: InputValidation
-    private lateinit var databaseHelper: DbHelperEstudiantes
+    //private lateinit var databaseHelper: DbHelperEstudiantes
+
+    private lateinit var db: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +96,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun initObjects() {
 
-        databaseHelper = DbHelperEstudiantes(activity)
+        //databaseHelper = DbHelperEstudiantes(activity)
         inputValidation = InputValidation(activity)
 
     }
@@ -101,7 +108,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
      */
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.appCompatButtonLogin -> verifyFromSQLite()
+            //R.id.appCompatButtonLogin -> verifyFromSQLite()
+            R.id.appCompatButtonLogin -> login()
             R.id.textViewLinkRegister -> {
                 // Navigate to RegisterActivity
                 val intentRegister = Intent(applicationContext, RegisterActivity::class.java)
@@ -110,11 +118,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    /**
-     * This method is to validate the input text fields and verify login credentials from SQLite
-     */
-    private fun verifyFromSQLite() {
-
+    private fun login() {
         if (!inputValidation!!.isInputEditTextFilled(textInputEditTextEmail!!, textInputLayoutEmail!!, getString(R.string.error_message_email))) {
             return
         }
@@ -125,20 +129,34 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
+        /*
         if (databaseHelper!!.checkUser(textInputEditTextEmail!!.text.toString().trim { it <= ' ' }, textInputEditTextPassword!!.text.toString().trim { it <= ' ' })) {
-
-
             val accountsIntent = Intent(activity, HomeActivity::class.java)
             //accountsIntent.putExtra("EMAIL", textInputEditTextEmail!!.text.toString().trim { it <= ' ' })
             emptyInputEditText()
             startActivity(accountsIntent)
-
-
         } else {
-
             // Snack Bar to show success message that record is wrong
             Snackbar.make(nestedScrollView!!, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show()
         }
+        */
+
+        val correo: String = textInputEditTextEmail.text.toString().trim()
+        val password: String = textInputEditTextPassword.text.toString().trim()
+
+        auth.signInWithEmailAndPassword(correo, password)
+            .addOnCompleteListener(this) {
+                    task ->
+                if (task.isSuccessful) {
+                    val accountsIntent = Intent(activity, HomeActivity::class.java)
+                    //accountsIntent.putExtra("EMAIL", textInputEditTextEmail!!.text.toString().trim { it <= ' ' })
+                    emptyInputEditText()
+                    startActivity(accountsIntent)
+                } else {
+                    // Snack Bar to show success message that record is wrong
+                    Snackbar.make(nestedScrollView!!, getString(R.string.error_valid_email_password), Snackbar.LENGTH_LONG).show()
+                }
+            }
     }
 
     /**

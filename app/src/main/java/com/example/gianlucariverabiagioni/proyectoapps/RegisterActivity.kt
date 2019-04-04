@@ -12,12 +12,10 @@ import android.view.View
 import android.widget.Toast
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import com.example.gianlucariverabiagioni.proyectoapps.classes.InputValidation
-import com.example.gianlucariverabiagioni.proyectoapps.dbhelper.DbHelperEstudiantes
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.activity_register.*
 
 
 class RegisterActivity : AppCompatActivity(), View.OnClickListener {
@@ -42,10 +40,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var appCompatTextViewLoginLink: AppCompatTextView
 
     private lateinit var inputValidation: InputValidation
-    private lateinit var databaseHelper: DbHelperEstudiantes
+    //private lateinit var databaseHelper: DbHelperEstudiantes
 
 
-    private lateinit var dbRefer: DatabaseReference
+    //private lateinit var dbRefer: DatabaseReference
     private lateinit var db: FirebaseFirestore
     private lateinit var auth: FirebaseAuth
 
@@ -109,7 +107,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun initObjects() {
         inputValidation = InputValidation(activity)
-        databaseHelper = DbHelperEstudiantes(activity)
+        //databaseHelper = DbHelperEstudiantes(activity)
 
 
     }
@@ -123,16 +121,16 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View) {
         when (v.id) {
 
-            R.id.appCompatButtonRegister -> postDataToSQLite()
+            //R.id.appCompatButtonRegister -> postDataToSQLite()
+            R.id.appCompatButtonRegister -> createAccount()
 
             R.id.appCompatTextViewLoginLink -> finish()
         }
     }
 
-    /**
-     * This method is to validate the input text fields and post data to SQLite
-     */
-    private fun postDataToSQLite() {
+
+    private fun createAccount() {
+
         if (!inputValidation!!.isInputEditTextFilled(textInputEditTextName, textInputLayoutName, getString(R.string.error_message_name))) {
             return
         }
@@ -150,34 +148,27 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
 
-        if (!databaseHelper.checkUser(textInputEditTextEmail.text.toString().trim(),textInputEditTextPassword.text.toString().trim())) {
-
+        /*
+        if (!db.checkUser(textInputEditTextEmail.text.toString().trim(),textInputEditTextPassword.text.toString().trim())) {
             var user = Estudiante(
                 name = textInputEditTextName.text.toString().trim(),
                 carne = textInputEditTextCarne.text.toString().trim(),
                 email = textInputEditTextEmail.text.toString().trim(),
                 password = textInputEditTextPassword.text.toString().trim())
-
             databaseHelper.addEstudiante(user)
-
             // Snack Bar to show success message that record saved successfully
             Snackbar.make(nestedScrollView!!, getString(R.string.success_message), Snackbar.LENGTH_LONG).show()
             emptyInputEditText()
-
-
         } else {
             // Snack Bar to show error message that record already exists
             Snackbar.make(nestedScrollView!!, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show()
         }
+        */
 
-
-    }
-
-    private fun newAccount() {
-        val name = textInputEditTextName.text.toString()
-        val carne = textInputEditTextCarne.text.toString()
-        val email = textInputEditTextEmail.text.toString()
-        val password = textInputEditTextPassword.text.toString()
+        val name = textInputEditTextName.text.toString().trim()
+        val carne = textInputEditTextCarne.text.toString().trim()
+        val email = textInputEditTextEmail.text.toString().trim()
+        val password = textInputEditTextPassword.text.toString().trim()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) {
@@ -185,15 +176,20 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
                 if (task.isComplete) {
                     val user: FirebaseUser? = auth.currentUser
+                    verifyEmail(user)
 
                     val usuario = Estudiante(name, carne, email, password).toMap()
                     db.collection("Users")
                         .add(usuario)
                         .addOnSuccessListener { documentReference ->
-                            Toast.makeText(applicationContext, "Creado correctamente", Toast.LENGTH_SHORT).show()
+                            emptyInputEditText()
+                            // Snack Bar to show success message that record saved successfully
+                            Snackbar.make(nestedScrollView!!, getString(R.string.success_message), Snackbar.LENGTH_LONG).show()
+
                         }
                         .addOnFailureListener { e ->
-                            Toast.makeText(applicationContext, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+                            // Snack Bar to show error message that record already exists
+                            Snackbar.make(nestedScrollView!!, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show()
                         }
                 }
             }
@@ -207,5 +203,19 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         textInputEditTextEmail!!.text = null
         textInputEditTextPassword!!.text = null
         textInputEditTextConfirmPassword!!.text = null
+    }
+
+    private fun verifyEmail(user:FirebaseUser?) {
+        user?.sendEmailVerification()
+            ?.addOnCompleteListener(this) {
+                    task ->
+
+                if (task.isComplete){
+                    //finish()
+                    Toast.makeText(this, "Enviado correctamente", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(this, "Ha ocurrido un error", Toast.LENGTH_LONG).show()
+                }
+            }
     }
 }
