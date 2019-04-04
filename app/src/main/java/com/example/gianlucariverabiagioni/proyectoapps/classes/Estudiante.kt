@@ -26,4 +26,14 @@ class Estudiante {
         this.contrasena = password
         this.horario = horario
     }
+
+    fun toMap(): Map<String, Any>{
+        val estudianteHashMap = HashMap<String, Any>()
+        estudianteHashMap.put("nombre", nombre)
+        estudianteHashMap.put("carne", carne)
+        estudianteHashMap.put("correo", correo)
+        estudianteHashMap.put("horario", horario)
+        estudianteHashMap.put("tutor", tutor)
+        return estudianteHashMap
+    }
 }
