@@ -83,7 +83,8 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            val intentAtras = Intent(this, HomeActivity::class.java)
+            startActivity(intentAtras)
         }
     }
 

@@ -74,7 +74,8 @@ class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            val intentAtras = Intent(this, HomeActivity::class.java)
+            startActivity(intentAtras)
         }
     }
 

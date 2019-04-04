@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
@@ -15,6 +16,7 @@ import kotlinx.android.synthetic.main.app_bar_configuracion.*
 
 class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var telefonoEmergencia: Int =  59781736
+    private var mDrawerLayout: DrawerLayout? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,9 @@ class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+            val intentAtras = Intent(this, HomeActivity::class.java)
+            startActivity(intentAtras)
+            //super.onBackPressed()
         }
     }
 
@@ -92,8 +96,7 @@ class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                 startActivity(intent)
             }
             R.id.nav_configuracion -> {
-                val intent6 = Intent(this, ConfiguracionActivity::class.java)
-                startActivity(intent6)
+                mDrawerLayout?.closeDrawers()
             }
         }
 
