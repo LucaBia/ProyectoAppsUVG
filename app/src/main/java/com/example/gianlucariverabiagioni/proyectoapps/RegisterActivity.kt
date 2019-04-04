@@ -9,9 +9,14 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.AppCompatButton
 import android.support.v7.widget.AppCompatTextView
 import android.view.View
+import android.widget.Toast
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import com.example.gianlucariverabiagioni.proyectoapps.classes.InputValidation
 import com.example.gianlucariverabiagioni.proyectoapps.dbhelper.DbHelperEstudiantes
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_register.*
 
 
@@ -39,6 +44,11 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var inputValidation: InputValidation
     private lateinit var databaseHelper: DbHelperEstudiantes
 
+
+    private lateinit var dbRefer: DatabaseReference
+    private lateinit var db: FirebaseFirestore
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,6 +66,9 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         // initializing the objects
         initObjects()
         onClick(appCompatButtonRegister)
+
+        db = FirebaseFirestore.getInstance()
+        auth = FirebaseAuth.getInstance()
     }
 
     /**
@@ -158,6 +171,32 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         }
 
 
+    }
+
+    private fun newAccount() {
+        val name = textInputEditTextName.text.toString()
+        val carne = textInputEditTextCarne.text.toString()
+        val email = textInputEditTextEmail.text.toString()
+        val password = textInputEditTextPassword.text.toString()
+
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) {
+                task ->
+
+                if (task.isComplete) {
+                    val user: FirebaseUser? = auth.currentUser
+
+                    val usuario = Estudiante(name, carne, email, password).toMap()
+                    db.collection("Users")
+                        .add(usuario)
+                        .addOnSuccessListener { documentReference ->
+                            Toast.makeText(applicationContext, "Creado correctamente", Toast.LENGTH_SHORT).show()
+                        }
+                        .addOnFailureListener { e ->
+                            Toast.makeText(applicationContext, "Ha ocurrido un error", Toast.LENGTH_SHORT).show()
+                        }
+                }
+            }
     }
 
     /**
