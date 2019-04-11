@@ -1,5 +1,6 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.app.Dialog
 import android.os.Bundle
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
@@ -16,9 +17,11 @@ import com.example.gianlucariverabiagioni.proyectoapps.adapters.EstudianteAdapte
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.TutoresData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.support.v4.widget.DrawerLayout
+import android.support.v7.app.AlertDialog
 import android.widget.ImageButton
 import android.widget.Toast
 
@@ -58,6 +61,28 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         }
 
         nav_view.setNavigationItemSelectedListener(this)
+        class MyOnClickListener (private val context: Context) : View.OnClickListener {
+
+            override fun onClick(v: View) {
+                var correo = TutoresData.correoArray[recyclerView!!.getChildPosition(v)]
+                var alertDialog: AlertDialog
+                alertDialog = AlertDialog.Builder(this.context,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
+                alertDialog.setTitle("Correo")
+                alertDialog.setMessage("Desea contactar al tutor?")
+                alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") {  dialog, which ->
+                    var mail = correo
+                    var asunto:String = "Tutoria"
+                    var mensaje:String = "Buen día, me gustaría recibir tutorias: "
+
+                    sendEmail(mail,asunto,mensaje)     }
+                alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancelar") { dialog, which ->
+                    alertDialog.cancel()
+                }
+                alertDialog.show()
+                //var correo = TutoresData.correoArray[recyclerView!!.getChildPosition(v)]
+                //Toast.makeText(context, correo , Toast.LENGTH_SHORT).show()
+            }
+        }
 
         myOnClickListener = MyOnClickListener(this)
 
@@ -82,6 +107,8 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
 
         adapter = EstudianteAdapter(data!!)
         recyclerView?.setAdapter(adapter)
+
+
 
     }
 
@@ -150,11 +177,30 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
     }
+    private fun sendEmail(correo: String, asunto: String, message: String){
+        val mIntent = Intent(Intent.ACTION_SEND)
+        mIntent.data = Uri.parse("mailto:")
+        mIntent.type = "text/plain"
+        mIntent.putExtra(Intent.EXTRA_EMAIL, arrayOf(correo))
+        mIntent.putExtra(Intent.EXTRA_SUBJECT, asunto)
+        mIntent.putExtra(Intent.EXTRA_TEXT, message)
 
-    private class MyOnClickListener (private val context: Context) : View.OnClickListener {
+        try {
+            startActivity(Intent.createChooser(mIntent, "Choose email client..."))
 
-        override fun onClick(v: View) {
-            Toast.makeText(context, "Hola" , Toast.LENGTH_SHORT).show()
+        }
+        catch (e: Exception){
+            //Si no funciona
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
         }
     }
+
+    /*private class MyOnClickListener (private val context: Context) : View.OnClickListener {
+
+        override fun onClick(v: View) {
+
+            TutoresData.correoArray[]
+            Toast.makeText(context, "Hola" , Toast.LENGTH_SHORT).show()
+        }
+    }*/
 }
