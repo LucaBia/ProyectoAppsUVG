@@ -1,5 +1,8 @@
 package com.example.gianlucariverabiagioni.proyectoapps.classes
 
+import android.content.ContentValues.TAG
+import android.util.Log
+
 class Horario{
 
     val horas : List<Periodo> = arrayListOf(
@@ -13,16 +16,17 @@ class Horario{
         Periodo(7, "12:20", "1:05")
     )
 
-    lateinit var horasP: MutableMap<Periodo, Curso?>
-    lateinit var lunes: MutableMap<Periodo, Curso?>
-    lateinit var martes: MutableMap<Periodo, Curso?>
-    lateinit var miercoles: MutableMap<Periodo, Curso?>
-    lateinit var jueves: MutableMap<Periodo, Curso?>
-    lateinit var viernes: MutableMap<Periodo, Curso?>
+    lateinit var horasP: MutableMap<Int, Curso?>
+    lateinit var lunes: MutableMap<Int, Curso?>
+    lateinit var martes: MutableMap<Int, Curso?>
+    lateinit var miercoles: MutableMap<Int, Curso?>
+    lateinit var jueves: MutableMap<Int, Curso?>
+    lateinit var viernes: MutableMap<Int, Curso?>
 
     init {
-        for (i in horas){
-            this.horasP = hashMapOf( i to null)
+        for (i in 0..(horas.size-1)){
+            this.horasP = hashMapOf( i to Curso(horas[i].inicioHora, horas[i].finalHora))
+            //this.horasP = hashMapOf( i to null)
             this.lunes = hashMapOf( i to null)
             this.martes = hashMapOf( i to null)
             this.miercoles = hashMapOf( i to null)
@@ -30,12 +34,12 @@ class Horario{
             this.viernes = hashMapOf( i to null)
         }
 
-        this.horasP.put(Periodo(0 ,"", ""), Curso("Horas", ""))
-        this.lunes.put(Periodo(0 ,"", ""), Curso("Lunes", ""))
-        this.martes.put(Periodo(0 ,"", ""), Curso("Martes", ""))
-        this.miercoles.put(Periodo(0 ,"", ""), Curso("Miercoles", ""))
-        this.jueves.put(Periodo(0 ,"", ""), Curso("Jueves", ""))
-        this.viernes.put(Periodo(0 ,"", ""), Curso("Viernes", ""))
+        this.horasP[0] = Curso("Horas", "")
+        this.lunes[0] = Curso("Lunes", "")
+        this.martes[0] = Curso("Martes", "")
+        this.miercoles[0] = Curso("Miercoles", "")
+        this.jueves[0] = Curso("Jueves", "")
+        this.viernes[0] = Curso("Viernes", "")
     }
 
     fun toMap(): Map<String, Any>{
@@ -50,16 +54,19 @@ class Horario{
     }
 
     fun toArray(): ArrayList<String?> {
-        var horarioArray = ArrayList<String?>()
+        val horarioArray = ArrayList<String?>()
 
-        for (i in horas){
-            horarioArray.add(horasP.get(i)?.nombre)
-            horarioArray.add(lunes.get(i)?.nombre)
-            horarioArray.add(martes.get(i)?.nombre)
-            horarioArray.add(miercoles.get(i)?.nombre)
-            horarioArray.add(jueves.get(i)?.nombre)
-            horarioArray.add(viernes.get(i)?.nombre)
+        for (i in 0..(horas.size-1)){
+            horarioArray.add(horasP[i]?.nombre)
+            horarioArray.add(lunes[i]?.nombre)
+            horarioArray.add(martes[i]?.nombre)
+            horarioArray.add(miercoles[i]?.nombre)
+            horarioArray.add(jueves[i]?.nombre)
+            horarioArray.add(viernes[i]?.nombre)
         }
+
+        print(horarioArray)
+        Log.i(TAG, "HOLAA" + horarioArray)
 
         return horarioArray
     }

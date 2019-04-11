@@ -9,21 +9,15 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.CursorAdapter
 import android.widget.GridView
 import android.widget.Toast
-import android.widget.Button
-import android.widget.ImageButton
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
-import com.example.gianlucariverabiagioni.proyectoapps.R
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.CursoAdapter
-import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -44,7 +38,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         modificar.setOnClickListener { view ->
             //TODO
             //val fragment = MainFragment()
-
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -56,20 +49,10 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
 
-        //var dataHorario: ArrayList<String> = ArrayList()
-/*        dataHorario.add("yvgubhn")
-        dataHorario.add("yvgubhn")
-        dataHorario.add("yvgubhn")
-        dataHorario.add("yvgubhn")
-        dataHorario.add("yvgubhn")
-        dataHorario.add("yvgubhn")*/
-        var dataHorario: Horario = miHorario
-
+        val dataHorario: Horario = miHorario
         gridView = findViewById<GridView>(R.id.grid) as GridView
         adapter = CursoAdapter(this, dataHorario)
         gridView.adapter = adapter
-
-        //gridView.setOnClickListener {  }
 
     }
 
