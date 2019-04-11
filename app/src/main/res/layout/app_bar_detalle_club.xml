@@ -16,5 +16,10 @@
 
     <include layout="@layout/content_detalle_club"/>
 
+    <ImageButton
+            android:layout_width="62dp"
+            android:layout_height="74dp" app:srcCompat="@android:drawable/ic_menu_sort_by_size"
+            android:id="@+id/drawerOpen" android:background="@color/colorFondo"/>
+
 
 </android.support.design.widget.CoordinatorLayout>

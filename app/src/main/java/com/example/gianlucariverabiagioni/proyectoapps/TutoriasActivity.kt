@@ -19,6 +19,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.support.v4.widget.DrawerLayout
+import android.widget.ImageButton
 import android.widget.Toast
 
 class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -50,6 +51,11 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+        drawerButton.setOnClickListener {
+            mDrawerLayout?.openDrawer(GravityCompat.START)
+        }
 
         nav_view.setNavigationItemSelectedListener(this)
 
