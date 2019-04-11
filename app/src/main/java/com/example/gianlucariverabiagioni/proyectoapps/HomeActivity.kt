@@ -56,13 +56,14 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
 
 
-        var dataHorario: ArrayList<String> = ArrayList()
+        //var dataHorario: ArrayList<String> = ArrayList()
+/*        dataHorario.add("yvgubhn")
         dataHorario.add("yvgubhn")
         dataHorario.add("yvgubhn")
         dataHorario.add("yvgubhn")
         dataHorario.add("yvgubhn")
-        dataHorario.add("yvgubhn")
-        dataHorario.add("yvgubhn")
+        dataHorario.add("yvgubhn")*/
+        var dataHorario: Horario = miHorario
 
         gridView = findViewById<GridView>(R.id.grid) as GridView
         adapter = CursoAdapter(this, dataHorario)

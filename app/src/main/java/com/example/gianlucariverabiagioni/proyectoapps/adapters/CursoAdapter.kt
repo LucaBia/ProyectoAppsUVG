@@ -10,8 +10,12 @@ import android.widget.TextView
 import com.example.gianlucariverabiagioni.proyectoapps.R
 import com.example.gianlucariverabiagioni.proyectoapps.TutoriasActivity
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Curso
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 
 class CursoAdapter : BaseAdapter {
+
+    private var context: Context
+    private var dataHorario: ArrayList<String?>
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         if (convertView == null) {
@@ -21,15 +25,12 @@ class CursoAdapter : BaseAdapter {
         return convertView
     }
 
-    private var context: Context
-    private var dataHorario: ArrayList<String>
-
-    constructor(context: Context, dataHorario: ArrayList<String>) {
+    constructor(context: Context, dataHorario: Horario) {
         this.context = context
-        this.dataHorario = dataHorario
+        this.dataHorario = dataHorario.toArray()
     }
 
-    override fun getItem(position: Int): Any {
+    override fun getItem(position: Int): Any? {
         return dataHorario.get(position)
     }
 
