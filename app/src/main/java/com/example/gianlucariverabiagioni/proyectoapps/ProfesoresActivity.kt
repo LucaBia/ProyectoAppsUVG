@@ -21,6 +21,7 @@ import com.example.gianlucariverabiagioni.proyectoapps.classes.Profesor
 import kotlinx.android.synthetic.main.activity_profesores.*
 import android.support.v4.widget.DrawerLayout
 import android.view.Gravity
+import android.widget.ImageButton
 
 
 class ProfesoresActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -51,6 +52,11 @@ class ProfesoresActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+        drawerButton.setOnClickListener {
+            mDrawerLayout?.openDrawer(GravityCompat.START)
+        }
 
         nav_view.setNavigationItemSelectedListener(this)
 

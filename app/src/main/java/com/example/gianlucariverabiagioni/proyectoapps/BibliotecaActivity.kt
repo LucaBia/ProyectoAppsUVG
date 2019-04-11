@@ -14,6 +14,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_biblioteca.*
@@ -44,6 +45,11 @@ class BibliotecaActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         val librosWebView = findViewById<WebView>(R.id.BookRes)
         librosWebView.webViewClient = MyBrowser()
         librosWebView.loadUrl("https://koha.uvg.edu.gt/#")
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+        drawerButton.setOnClickListener {
+            mDrawerLayout?.openDrawer(GravityCompat.START)
+        }
 
     }
     private fun sendEmail(correo: String, asunto: String, message: String){

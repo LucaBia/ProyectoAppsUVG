@@ -13,6 +13,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.ClubData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
@@ -47,6 +48,11 @@ class ClubesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelec
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+        drawerButton.setOnClickListener {
+            mDrawerLayout?.openDrawer(GravityCompat.START)
+        }
 
         val basquetButton = findViewById<Button>(R.id.btnBaloncesto)
         basquetButton.setOnClickListener {

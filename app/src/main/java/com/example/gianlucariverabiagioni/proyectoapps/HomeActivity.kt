@@ -1,8 +1,10 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
@@ -10,14 +12,29 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.GridView
+import android.widget.Toast
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.CursoAdapter
+import android.support.v4.os.HandlerCompat.postDelayed
+import android.widget.ImageButton
+
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
     val miHorario : Horario = Horario()
     var telefonoEmergencia: Int =  59781736
     private var mDrawerLayout: DrawerLayout? = null
+
+    private lateinit var gridView: GridView
+    private lateinit var adapter: CursoAdapter
+
+    companion object {
+        @JvmStatic var myOnClickListener: View.OnClickListener? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +42,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         modificar.setOnClickListener { view ->
             //TODO
             //val fragment = MainFragment()
-
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -34,8 +50,34 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+        drawerButton.setOnClickListener {
+            mDrawerLayout?.openDrawer(GravityCompat.START)
+        }
+
         nav_view.setNavigationItemSelectedListener(this)
 
+        gridView = findViewById<GridView>(R.id.grid) as GridView
+        cargar()
+
+        /*
+        val EXECUTION_TIME: Long = 60000 // 1 minuto
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                cargar()
+                handler.postDelayed(this, EXECUTION_TIME)
+            }
+        }, EXECUTION_TIME)
+        */
+    }
+
+    fun cargar() {
+        val dataHorario: Horario = miHorario
+        //gridView = findViewById<GridView>(R.id.grid) as GridView
+        adapter = CursoAdapter(this, dataHorario)
+        gridView.adapter = adapter
     }
 
     override fun onBackPressed() {
@@ -106,6 +148,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    public class MyOnClickListener (private val context: Context) : View.OnClickListener {
+
+        override fun onClick(v: View) {
+            Toast.makeText(context, "Hola" , Toast.LENGTH_SHORT).show()
+        }
     }
 
 }

@@ -23,5 +23,10 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             app:srcCompat="@android:drawable/ic_dialog_email"/>
+    <ImageButton
+            android:layout_width="71dp"
+            android:layout_height="71dp" app:srcCompat="@android:drawable/ic_menu_sort_by_size"
+            android:id="@+id/drawerOpen" android:background="@color/colorFondo"/>
+
 
 </android.support.design.widget.CoordinatorLayout>
