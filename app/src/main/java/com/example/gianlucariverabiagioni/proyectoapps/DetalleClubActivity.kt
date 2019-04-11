@@ -6,11 +6,13 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
+import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Club
@@ -23,7 +25,7 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
     var telefonoEmergencia: Int =  59781736
     var club: Club = Club()
     //var myAwesomeTextView = findViewById<TextView>(R.id.tvNombre)
-
+    private var mDrawerLayout: DrawerLayout? = null
 
     var clubBaloncesto: Club = Club("Baloncesto", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de baloncesto ...")
     var clubFutbol: Club = Club("Fútbol", Estudiante("Julio", "18040", "jul18040@uvg.edu.gt", "123"), "El club de futbol ...")
@@ -59,6 +61,11 @@ class DetalleClubActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+        drawerButton.setOnClickListener {
+            mDrawerLayout?.openDrawer(GravityCompat.START)
+        }
 
         nav_view.setNavigationItemSelectedListener(this)
         var tvNombre = findViewById<TextView>(R.id.tvNombre)
