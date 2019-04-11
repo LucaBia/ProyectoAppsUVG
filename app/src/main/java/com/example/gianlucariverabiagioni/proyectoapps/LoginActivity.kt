@@ -23,7 +23,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
-    private val activity = this@LoginActivity
+    public val activity = this@LoginActivity
 
     private lateinit var nestedScrollView: NestedScrollView
 
@@ -42,6 +42,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var db: FirebaseFirestore
     private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -121,7 +122,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    private fun login() {
+    fun login() {
         if (!inputValidation!!.isInputEditTextFilled(textInputEditTextEmail!!, textInputLayoutEmail!!, getString(R.string.error_message_email))) {
             return
         }
@@ -144,8 +145,8 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         }
         */
 
-        val correo: String = textInputEditTextEmail.text.toString().trim()
-        val password: String = textInputEditTextPassword.text.toString().trim()
+        var correo = textInputEditTextEmail.text.toString().trim()
+        var password = textInputEditTextPassword.text.toString().trim()
 
         auth.signInWithEmailAndPassword(correo, password)
             .addOnCompleteListener(this) {

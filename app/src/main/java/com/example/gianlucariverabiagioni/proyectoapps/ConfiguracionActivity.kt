@@ -9,14 +9,45 @@ import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.android.synthetic.main.activity_configuracion.*
-import kotlinx.android.synthetic.main.app_bar_configuracion.*
+import com.google.firebase.database.GenericTypeIndicator
+import com.google.firebase.firestore.QueryDocumentSnapshot
+import com.google.android.gms.tasks.Task
+import android.support.annotation.NonNull
+import android.support.v4.app.FragmentActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.firestore.CollectionReference
+import kotlinx.android.synthetic.main.content_configuracion.*
 
+
+@Suppress("UNREACHABLE_CODE")
 class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     var telefonoEmergencia: Int =  59781736
     private var mDrawerLayout: DrawerLayout? = null
+
+    private lateinit var txtNombre: TextView
+    private lateinit var txtCarnet: TextView
+    private lateinit var txtCorreo: TextView
+    private lateinit var auth: FirebaseAuth
+
+    private lateinit var ref: DatabaseReference
+
+    var fdb = FirebaseDatabase.getInstance()
+    var myRef = fdb.getReference("Estudiantes")
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,7 +66,97 @@ class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        ref = FirebaseDatabase.getInstance().getReference("Estudiantes")
+
+        auth= FirebaseAuth.getInstance()
+        txtNombre=findViewById(R.id.txtNombre)
+        txtCarnet=findViewById(R.id.txtCarnet)
+        txtCorreo=findViewById(R.id.txtCorreo)
+
+
+       //var hola = LoginActivity().correo
+
+        val myDB = FirebaseFirestore.getInstance()
+
+        myDB.collection("Estudiantes")
+                //TODO en el value "Andy" cambiar a el correo que el usuario ingresa
+            .whereEqualTo("correo", "Andy")
+            .get().addOnSuccessListener {
+                it.forEach {
+                    txtNombre.text = it.get("nombre").toString()
+                    txtCarnet.text = it.get("carne").toString()
+                    txtCorreo.text = it.get("correo").toString()
+                    /*println(
+                        "Gravity of ${it.get("nombre")} is ${it.get("carne")} m/s/s"
+                    )*/
+                }
+            }
+
+        /*myRef.addValueEventListener(object: ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                val t = object : GenericTypeIndicator<Estudiante>() {
+                }
+                //var estudiante = Estudiante()
+                var estudiante : Estudiante? = p0.getValue(t)
+
+                //estudiante = p0.getValue(t)
+
+                txtNombre.text = estudiante?.nombre
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                Log.e("ERROR FIREBASE",p0.getMessage())
+            }
+
+        })*/
+
+
+
+        //loadUserInfo()
     }
+
+    fun loadUserInfo(){
+        val user: FirebaseUser? =auth.currentUser
+        val us = FirebaseFirestore.getInstance()
+        us.collection("Estudiantes").get().addOnSuccessListener { OnSuccessListener<QuerySnapshot>() {
+            Log.e("SHOW",it.toObjects(Estudiante::class.java).size.toString())
+
+        }}
+        getuserinfo(us)
+        if (user != null) {
+            if (user.displayName!=null) {
+
+                var nombre = user.displayName
+                txtNombre.text = nombre
+            }
+        }
+    }
+
+    fun getuserinfo(mFirebaseFirestore: FirebaseFirestore) {
+        val TAG = "SS"
+        val correo = intent.getStringExtra("CORREO")
+        mFirebaseFirestore.collection("Estudiantes").whereEqualTo("correo", correo).get()
+            .addOnSuccessListener(OnSuccessListener { documentSnapshots ->
+                if (documentSnapshots.isEmpty) {
+                    Log.e(TAG, "onSuccess: LIST EMPTY")
+                    return@OnSuccessListener
+                } else {
+                    val types = documentSnapshots.toObjects(Estudiante::class.java)
+
+                    txtNombre.text = types[0].nombre!!
+                    txtCarnet.text = types[0].carne!!
+                    txtCorreo.text = types[0].correo!!
+                    Log.e(TAG, "onSuccess: " + types[0].nombre!!)
+                }
+            })
+        auth = FirebaseAuth.getInstance()
+
+    }
+
+
+
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {

@@ -3,11 +3,11 @@ package com.example.gianlucariverabiagioni.proyectoapps.classes
 import android.media.Image
 
 class Estudiante {
-    var nombre: String
-    var carne: String
-    var correo: String
-    var contrasena: String
-    var horario: Horario
+    lateinit var nombre: String
+    lateinit var carne: String
+    lateinit var correo: String
+    lateinit var contrasena: String
+    lateinit var horario: Horario
     var tutor: Boolean = false
     var image: Int = 0
 
@@ -25,6 +25,10 @@ class Estudiante {
         this.correo = email
         this.contrasena = password
         this.horario = horario
+    }
+
+    constructor(){
+
     }
 
     fun toMap(): Map<String, Any>{
