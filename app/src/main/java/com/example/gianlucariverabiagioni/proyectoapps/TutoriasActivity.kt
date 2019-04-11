@@ -17,7 +17,6 @@ import com.example.gianlucariverabiagioni.proyectoapps.adapters.EstudianteAdapte
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.TutoresData
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.net.Uri
 import android.support.v4.widget.DrawerLayout
@@ -67,7 +66,7 @@ class TutoriasActivity : AppCompatActivity(), NavigationView.OnNavigationItemSel
                 var correo = TutoresData.correoArray[recyclerView!!.getChildPosition(v)]
                 var alertDialog: AlertDialog
                 alertDialog = AlertDialog.Builder(this.context,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
-                alertDialog.setTitle("Correo")
+                alertDialog.setTitle("Contactar")
                 alertDialog.setMessage("Desea contactar al tutor?")
                 alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") {  dialog, which ->
                     var mail = correo

@@ -20,7 +20,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.CursoAdapter
 import android.support.v4.os.HandlerCompat.postDelayed
-
+import android.widget.ImageButton
 
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +49,12 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+        drawerButton.setOnClickListener {
+            mDrawerLayout?.openDrawer(GravityCompat.START)
+        }
 
         nav_view.setNavigationItemSelectedListener(this)
 
