@@ -1,5 +1,6 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,16 +12,31 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.CursorAdapter
+import android.widget.GridView
+import android.widget.Toast
 import android.widget.Button
 import android.widget.ImageButton
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
+import com.example.gianlucariverabiagioni.proyectoapps.R
+import com.example.gianlucariverabiagioni.proyectoapps.adapters.CursoAdapter
+import kotlinx.android.synthetic.main.content_home.*
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+
     val miHorario : Horario = Horario()
     var telefonoEmergencia: Int =  59781736
     private var mDrawerLayout: DrawerLayout? = null
+
+    private lateinit var gridView: GridView
+    private lateinit var adapter: CursoAdapter
+
+    companion object {
+        @JvmStatic var myOnClickListener: View.OnClickListener? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +54,22 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+
+        //var dataHorario: ArrayList<String> = ArrayList()
+/*        dataHorario.add("yvgubhn")
+        dataHorario.add("yvgubhn")
+        dataHorario.add("yvgubhn")
+        dataHorario.add("yvgubhn")
+        dataHorario.add("yvgubhn")
+        dataHorario.add("yvgubhn")*/
+        var dataHorario: Horario = miHorario
+
+        gridView = findViewById<GridView>(R.id.grid) as GridView
+        adapter = CursoAdapter(this, dataHorario)
+        gridView.adapter = adapter
+
+        //gridView.setOnClickListener {  }
 
     }
 
@@ -109,6 +141,13 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    public class MyOnClickListener (private val context: Context) : View.OnClickListener {
+
+        override fun onClick(v: View) {
+            Toast.makeText(context, "Hola" , Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
