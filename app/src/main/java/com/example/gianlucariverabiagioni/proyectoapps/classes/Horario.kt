@@ -26,7 +26,6 @@ class Horario{
     init {
         for (i in 0..(horas.size-1)){
             this.horasP = hashMapOf( i to Curso(horas[i].inicioHora, horas[i].finalHora))
-            //this.horasP = hashMapOf( i to null)
             this.lunes = hashMapOf( i to null)
             this.martes = hashMapOf( i to null)
             this.miercoles = hashMapOf( i to null)

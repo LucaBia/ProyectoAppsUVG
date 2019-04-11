@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
@@ -18,6 +19,9 @@ import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.CursoAdapter
+import android.support.v4.os.HandlerCompat.postDelayed
+
+
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -48,12 +52,26 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
 
-
-        val dataHorario: Horario = miHorario
         gridView = findViewById<GridView>(R.id.grid) as GridView
+        cargar()
+
+        /*
+        val EXECUTION_TIME: Long = 60000 // 1 minuto
+        val handler = Handler()
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                cargar()
+                handler.postDelayed(this, EXECUTION_TIME)
+            }
+        }, EXECUTION_TIME)
+        */
+    }
+
+    fun cargar() {
+        val dataHorario: Horario = miHorario
+        //gridView = findViewById<GridView>(R.id.grid) as GridView
         adapter = CursoAdapter(this, dataHorario)
         gridView.adapter = adapter
-
     }
 
     override fun onBackPressed() {
