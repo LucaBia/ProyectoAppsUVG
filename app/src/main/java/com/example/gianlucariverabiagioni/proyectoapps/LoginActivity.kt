@@ -17,6 +17,7 @@ import android.widget.Toast
 
 import com.example.gianlucariverabiagioni.proyectoapps.classes.InputValidation
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -37,9 +38,9 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var textViewLinkRegister: AppCompatTextView
 
     private lateinit var inputValidation: InputValidation
-    //private lateinit var databaseHelper: DbHelperEstudiantes
 
     private lateinit var db: FirebaseFirestore
+    private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {

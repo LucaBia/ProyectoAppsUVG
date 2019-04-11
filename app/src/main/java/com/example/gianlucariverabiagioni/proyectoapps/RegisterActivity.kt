@@ -16,6 +16,7 @@ import com.example.gianlucariverabiagioni.proyectoapps.classes.InputValidation
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 
 
@@ -41,33 +42,29 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var appCompatTextViewLoginLink: AppCompatTextView
 
     private lateinit var inputValidation: InputValidation
-    //private lateinit var databaseHelper: DbHelperEstudiantes
 
-
-    //private lateinit var dbRefer: DatabaseReference
+    private lateinit var dbRefer: DatabaseReference
     private lateinit var db: FirebaseFirestore
+    private lateinit var database: FirebaseDatabase
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_register)
 
         // hiding the action bar
         supportActionBar!!.hide()
-
         // initializing the views
         initViews()
-
         // initializing the listeners
         initListeners()
-
         // initializing the objects
         initObjects()
         onClick(appCompatButtonRegister)
-
         db = FirebaseFirestore.getInstance()
+        database = FirebaseDatabase.getInstance()
         auth = FirebaseAuth.getInstance()
+        dbRefer = database.reference.child("Estudiantes")
     }
 
     /**
@@ -108,9 +105,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
      */
     private fun initObjects() {
         inputValidation = InputValidation(activity)
-        //databaseHelper = DbHelperEstudiantes(activity)
-
-
     }
 
 
@@ -166,10 +160,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         }
         */
 
-        val name = textInputEditTextName.text.toString().trim()
+        val name = textInputEditTextName.text.toString()
         val carne = textInputEditTextCarne.text.toString().trim()
         val email = textInputEditTextEmail.text.toString().trim()
-        val password = textInputEditTextPassword.text.toString().trim()
+        val password = textInputEditTextPassword.text.toString()
 
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) {
@@ -179,7 +173,19 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                     val user: FirebaseUser? = auth.currentUser
                     verifyEmail(user)
 
+                    //val usuario = dbRefer.child(user!!.uid)
                     val usuario = Estudiante(name, carne, email, password).toMap()
+
+                    //usuario.child("Nombre").setValue(name)
+                    //usuario.child("Carne").setValue(carne)
+                    //usuario.child("Correo").setValue(email)
+                    /*usuario.child("Contrasena").setValue(password)
+                    usuario.child("Horario").setValue(name)
+                    usuario.child("Tutor").setValue(name)
+                    usuario.child("Imagen").setValue(name)*/
+
+
+
                     db.collection("Estudiantes")
                         .add(usuario)
                         .addOnSuccessListener { documentReference ->
@@ -192,6 +198,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                             // Snack Bar to show error message that record already exists
                             Snackbar.make(nestedScrollView!!, getString(R.string.error_email_exists), Snackbar.LENGTH_LONG).show()
                         }
+
 
                     startActivity(Intent(this, LoginActivity::class.java))
                 }

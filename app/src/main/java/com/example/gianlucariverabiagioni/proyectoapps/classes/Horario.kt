@@ -1,6 +1,7 @@
 package com.example.gianlucariverabiagioni.proyectoapps.classes
 
 class Horario{
+
     val horas : List<Periodo> = arrayListOf(
         Periodo(1 ,"7:00", "7:45"),
         Periodo(2, "7:50", "8:35"),
@@ -27,8 +28,14 @@ class Horario{
         }
     }
 
-
-
-
+    fun toMap(): Map<String, Any>{
+        val horarioHashMap = HashMap<String, Any>()
+        horarioHashMap.put("Lunes", lunes.toString())
+        horarioHashMap.put("Martes", martes.toString())
+        horarioHashMap.put("Miercoles", miercoles.toString())
+        horarioHashMap.put("Jueves", jueves.toString())
+        horarioHashMap.put("Viernes", viernes.toString())
+        return horarioHashMap
+    }
 
 }

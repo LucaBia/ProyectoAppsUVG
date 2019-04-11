@@ -32,7 +32,7 @@ class Estudiante {
         estudianteHashMap.put("nombre", nombre)
         estudianteHashMap.put("carne", carne)
         estudianteHashMap.put("correo", correo)
-        estudianteHashMap.put("horario", horario)
+        estudianteHashMap.put("horario", horario.toMap())
         estudianteHashMap.put("tutor", tutor)
         return estudianteHashMap
     }
