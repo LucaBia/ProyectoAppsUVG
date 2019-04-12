@@ -33,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import android.content.ContentValues.TAG
 import android.support.annotation.NonNull
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Curso
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.OnSuccessListener
 import com.google.android.gms.tasks.Task
@@ -42,8 +43,8 @@ import com.google.firebase.firestore.DocumentSnapshot
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    //val miHorario : Horario = Horario()
     lateinit var horario : Horario
+    lateinit var horarioSaber : Horario
     var telefonoEmergencia: Int =  59781736
     private var mDrawerLayout: DrawerLayout? = null
     private lateinit var dbRefer: DatabaseReference
@@ -72,11 +73,8 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .get().addOnSuccessListener {
                 it.forEach {
                     //horario = it.get("horario")
-                    //horario = it.getData()
+                    horarioSaber = toHorario(it.getData().get("horario") as Map<String, Any>)
                     horario = it.get("horario", Horario::class.java)!!
-                    /*println("---------------------------------------------------------------------------------------------")
-                    println(horario)
-                    println("---------------------------------------------------------------------------------------------")*/
 
                     modificar.setOnClickListener { view ->
                         val alertDialog: AlertDialog
@@ -159,6 +157,19 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     fun cargar(horario: Horario) {
         adapter = CursoAdapter(this, horario)
         gridView.adapter = adapter
+    }
+
+    fun toHorario(horarioMapa: Map<String, Any>): Horario {
+        val horario = Horario()
+
+        //horario.horasP = horarioMapa["Lunes"]
+        /*horario.lunes = horarioMapa["Lunes"] as MutableMap<Int, Curso?>
+        horario.martes = horarioMapa["Martes"] as MutableMap<Int, Curso?>
+        horario.miercoles = horarioMapa["Miercoles"] as MutableMap<Int, Curso?>
+        horario.jueves = horarioMapa["Jueves"] as MutableMap<Int, Curso?>
+        horario.viernes = horarioMapa["Viernes"] as MutableMap<Int, Curso?>*/
+
+        return horario
     }
 
     override fun onBackPressed() {

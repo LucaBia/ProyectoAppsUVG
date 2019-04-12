@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top|end"
             android:layout_margin="@dimen/fab_margin"
-            app:srcCompat="@android:drawable/ic_dialog_email"/>
+            app:srcCompat="@android:drawable/ic_input_add"
+            app:backgroundTint="@color/common_google_signin_btn_text_dark_focused"/>
 
     <ImageButton
             android:layout_width="71dp"
