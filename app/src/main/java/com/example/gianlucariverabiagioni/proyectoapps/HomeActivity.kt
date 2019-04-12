@@ -79,30 +79,61 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     println("---------------------------------------------------------------------------------------------")*/
 
                     modificar.setOnClickListener { view ->
-                        var alertDialog: AlertDialog
+                        val alertDialog: AlertDialog
                         alertDialog = AlertDialog.Builder(this,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
                         alertDialog.setTitle("Agregar Curso")
                         alertDialog.setMessage("Dia")
-                        alertDialog.setMessage("Hora Inicio")
-                        alertDialog.setMessage("Curso")
-                        alertDialog.setMessage("Salon")
+                        val inputDia = EditText(this)
+                        inputDia.hint = "dia"
+                        alertDialog.setView(inputDia)
 
-                        var inputSalon = EditText(this)
-                        inputSalon.hint = "salon"
-                        alertDialog.setView(inputSalon)
+                        alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Aceptar") { dialog, which ->
+                            val dia =inputDia.text.toString()
+                            val alertDialog1: AlertDialog
+                            alertDialog1 = AlertDialog.Builder(this,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
+                            alertDialog1.setTitle("Agregar Curso")
+                            alertDialog1.setMessage("Num Periodo")
+                            val inputPer= EditText(this)
+                            inputPer.hint= "num"
+                            alertDialog1.setView(inputPer)
 
-                        alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") { dialog, which ->
-                            //TODO
-                            //miHorario.addCurso()
+                            alertDialog1.setButton(Dialog.BUTTON_POSITIVE,"Aceptar"){ dialog, which ->
+                                val periodo = inputPer.text.toString().toInt()
+
+                                val alertDialog2: AlertDialog
+                                alertDialog2 = AlertDialog.Builder(this,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
+                                alertDialog2.setTitle("Agregar Curso")
+                                alertDialog2.setMessage("Nombre Curso")
+                                val inputNom= EditText(this)
+                                inputNom.hint= "Nombre"
+                                alertDialog2.setView(inputNom)
+
+                                alertDialog2.setButton(Dialog.BUTTON_POSITIVE,"Aceptar"){ dialog, which ->
+                                    val nombre = inputNom.text.toString()
+                                    val alertDialog3: AlertDialog
+                                    alertDialog3 = AlertDialog.Builder(this,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
+                                    alertDialog3.setTitle("Agregar Curso")
+                                    alertDialog3.setMessage("Salon")
+                                    val inputSalon= EditText(this)
+                                    inputSalon.hint= "Salon"
+                                    alertDialog3.setView(inputSalon)
+
+                                    alertDialog3.setButton(Dialog.BUTTON_POSITIVE,"Aceptar"){ dialog, which ->
+                                        val salon = inputSalon.text.toString()
+                                        horario.addCurso(dia, periodo, nombre, salon)
+                                        db.collection("Estudiantes").document(it.id).update("horario", horario.toMap())
+                                        cargar(horario)
+                                    }
+                                    alertDialog3.show()
+                                }
+                                alertDialog2.show()
+                            }
+                            alertDialog1.show()
                         }
                         alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancelar") { dialog, which ->
                             alertDialog.cancel()
                         }
                         alertDialog.show()
-
-                        horario.addCurso("Lunes", 2, "Apps", "H-302")
-                        db.collection("Estudiantes").document(it.id).update("horario", horario.toMap())
-                        cargar(horario)
                     }
 
                     val toggle = ActionBarDrawerToggle(
