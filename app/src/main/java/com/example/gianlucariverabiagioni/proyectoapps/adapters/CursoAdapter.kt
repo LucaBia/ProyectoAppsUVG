@@ -9,13 +9,13 @@ import android.widget.TextView
 import com.example.gianlucariverabiagioni.proyectoapps.R
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Horario
 import android.support.v4.content.ContextCompat.getSystemService
+import com.example.gianlucariverabiagioni.proyectoapps.classes.Curso
 
 
-
-class CursoAdapter(context: Context, dataHorario: Horario) : BaseAdapter() {
+class CursoAdapter(context: Context, horario: Horario) : BaseAdapter() {
 
     private var context: Context
-    private var dataHorario: ArrayList<String?>
+    private var dataHorario: ArrayList<Curso?>
 
     /*constructor(context: Context, dataHorario: Horario) {
         //this.context = context
@@ -24,7 +24,7 @@ class CursoAdapter(context: Context, dataHorario: Horario) : BaseAdapter() {
 
     init {
         this.context = context
-        this.dataHorario = dataHorario.toArray()
+        this.dataHorario = horario.toArray()
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
@@ -41,8 +41,8 @@ class CursoAdapter(context: Context, dataHorario: Horario) : BaseAdapter() {
 
         var textViewName: TextView = convertView1.findViewById(R.id.text_view_nombre) as TextView
         var textViewSalon: TextView = convertView1.findViewById(R.id.text_view_salon) as TextView
-        textViewName.text = dataHorario[position]
-
+        textViewName.text = dataHorario[position]?.nombre
+        textViewSalon.text = dataHorario[position]?.salon
         return convertView1
     }
 

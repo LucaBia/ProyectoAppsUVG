@@ -74,9 +74,9 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun cargar() {
-        val dataHorario: Horario = miHorario
+        val horario: Horario = miHorario
         //gridView = findViewById<GridView>(R.id.grid) as GridView
-        adapter = CursoAdapter(this, dataHorario)
+        adapter = CursoAdapter(this, horario)
         gridView.adapter = adapter
     }
 
