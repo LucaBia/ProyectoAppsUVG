@@ -27,9 +27,12 @@ import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.android.gms.tasks.Task
 import android.support.annotation.NonNull
 import android.support.v4.app.FragmentActivity
+import android.widget.Button
+import android.widget.Toast
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.CollectionReference
 import kotlinx.android.synthetic.main.content_configuracion.*
+import org.w3c.dom.Text
 
 
 @Suppress("UNREACHABLE_CODE")
@@ -95,6 +98,14 @@ class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationIt
                     )*/
                 }
             }
+
+        val newCont = findViewById<TextView>(R.id.newCont)
+        val cambiar = findViewById<Button>(R.id.buttonCambiar)
+        cambiar.setOnClickListener {
+            var cont = newCont.text
+            user!!.updatePassword(cont.toString())
+            Toast.makeText(this, "Se cambio la contraseña a ${cont}" , Toast.LENGTH_SHORT).show()
+        }
 
         /*myRef.addValueEventListener(object: ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
