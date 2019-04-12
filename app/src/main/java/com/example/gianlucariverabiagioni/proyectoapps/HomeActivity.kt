@@ -101,9 +101,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         alertDialog.show()
 
                         horario.addCurso("Lunes", 2, "Apps", "H-302")
-
-                        it.data.set("horario", horario)
-
+                        db.collection("Estudiantes").document(it.id).update("horario", horario.toMap())
                         cargar(horario)
                     }
 
