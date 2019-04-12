@@ -1,5 +1,6 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -20,6 +21,7 @@ import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home.*
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.CursoAdapter
 import android.support.v4.os.HandlerCompat.postDelayed
+import android.support.v7.app.AlertDialog
 import android.widget.ImageButton
 
 
@@ -40,8 +42,24 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         modificar.setOnClickListener { view ->
-            //TODO
             //val fragment = MainFragment()
+            //Toast.makeText(this, "Hola soy modificar" , Toast.LENGTH_SHORT).show()
+            //TODO
+            var alertDialog: AlertDialog
+            alertDialog = AlertDialog.Builder(this,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
+            alertDialog.setTitle("Agregar Curso")
+            alertDialog.setMessage("Dia")
+            alertDialog.setMessage("Hora Inicio")
+            alertDialog.setMessage("Curso")
+            alertDialog.setMessage("Salon")
+            alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") { dialog, which ->
+                //TODO
+                //miHorario.addCurso()
+            }
+            alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancelar") { dialog, which ->
+                alertDialog.cancel()
+            }
+            alertDialog.show()
         }
 
         val toggle = ActionBarDrawerToggle(
@@ -75,7 +93,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun cargar() {
         val horario: Horario = miHorario
-        //gridView = findViewById<GridView>(R.id.grid) as GridView
         adapter = CursoAdapter(this, horario)
         gridView.adapter = adapter
     }

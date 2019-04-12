@@ -45,6 +45,26 @@ class Horario{
         //Log.i(TAG, "HOLAA" + horasP)
     }
 
+    fun addCurso(dia: String, num: Int, nombre: String, salon: String) {
+        when (dia) {
+            "Lunes" -> this.lunes[num] = Curso(nombre, salon)
+            "Martes" -> this.martes[num] = Curso(nombre, salon)
+            "Miercoles" -> this.miercoles[num] = Curso(nombre, salon)
+            "Jueves" -> this.jueves[num] = Curso(nombre, salon)
+            else -> this.viernes[num] = Curso(nombre, salon)
+        }
+    }
+
+    fun deleteCurso(dia: String, num: Int) {
+        when (dia) {
+            "Lunes" -> this.lunes[num] = null
+            "Martes" -> this.martes[num] = null
+            "Miercoles" -> this.miercoles[num] = null
+            "Jueves" -> this.jueves[num] = null
+            else -> this.viernes[num] = null
+        }
+    }
+
     fun toMap(): Map<String, Any>{
         val horarioHashMap = HashMap<String, Any>()
         horarioHashMap.put("Horas", horasP.toString())
