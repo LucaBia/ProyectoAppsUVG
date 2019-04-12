@@ -86,7 +86,6 @@ class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
         myDB.collection("Estudiantes")
-                //TODO en el value "Andy" cambiar a el correo que el usuario ingresa
             .whereEqualTo("correo", user?.email)
             .get().addOnSuccessListener {
                 it.forEach {

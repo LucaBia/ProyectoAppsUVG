@@ -87,7 +87,7 @@ class Horario{
             horarioArray.add(jueves[i])
             horarioArray.add(viernes[i])
         }
-        Log.i(TAG, "HOLAA" + horarioArray)
+
         return horarioArray
     }
 

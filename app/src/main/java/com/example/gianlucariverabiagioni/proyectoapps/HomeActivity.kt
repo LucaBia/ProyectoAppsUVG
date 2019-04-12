@@ -1,6 +1,7 @@
 package com.example.gianlucariverabiagioni.proyectoapps
 
 import android.app.Dialog
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -22,18 +23,36 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.CursoAdapter
 import android.support.v4.os.HandlerCompat.postDelayed
 import android.support.v7.app.AlertDialog
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
+import android.content.ContentValues.TAG
+import android.support.annotation.NonNull
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.DocumentSnapshot
 
 
 class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    val miHorario : Horario = Horario()
+    //val miHorario : Horario = Horario()
+    lateinit var horario : Horario
     var telefonoEmergencia: Int =  59781736
     private var mDrawerLayout: DrawerLayout? = null
-
+    private lateinit var dbRefer: DatabaseReference
     private lateinit var gridView: GridView
     private lateinit var adapter: CursoAdapter
+    private lateinit var database: FirebaseDatabase
+    private lateinit var db: FirebaseFirestore
+    private lateinit var user: FirebaseUser
+
 
     companion object {
         @JvmStatic var myOnClickListener: View.OnClickListener? = null
@@ -42,7 +61,70 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        modificar.setOnClickListener { view ->
+
+        database = FirebaseDatabase.getInstance()
+        //dbRefer = database.reference.child("Estudiantes")
+        db = FirebaseFirestore.getInstance()
+        user = FirebaseAuth.getInstance().currentUser!!
+
+        db.collection("Estudiantes")
+            .whereEqualTo("correo", user?.email)
+            .get().addOnSuccessListener {
+                it.forEach {
+                    //horario = it.get("horario")
+                    //horario = it.getData()
+                    horario = it.get("horario", Horario::class.java)!!
+                    /*println("---------------------------------------------------------------------------------------------")
+                    println(horario)
+                    println("---------------------------------------------------------------------------------------------")*/
+
+                    modificar.setOnClickListener { view ->
+                        //val fragment = MainFragment()
+                        //Toast.makeText(this, "Hola soy modificar" , Toast.LENGTH_SHORT).show()
+                        //TODO
+                        var alertDialog: AlertDialog
+                        alertDialog = AlertDialog.Builder(this,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
+                        alertDialog.setTitle("Agregar Curso")
+                        alertDialog.setMessage("Dia")
+                        alertDialog.setMessage("Hora Inicio")
+                        alertDialog.setMessage("Curso")
+                        alertDialog.setMessage("Salon")
+
+                        var inputSalon = EditText(this)
+                        inputSalon.hint = "salon"
+                        alertDialog.setView(inputSalon)
+
+                        alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") { dialog, which ->
+                            //TODO
+                            //miHorario.addCurso()
+
+                        }
+                        alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancelar") { dialog, which ->
+                            alertDialog.cancel()
+                        }
+                        alertDialog.show()
+                    }
+
+                    val toggle = ActionBarDrawerToggle(
+                        this, drawer_layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
+                    )
+                    drawer_layout.addDrawerListener(toggle)
+                    toggle.syncState()
+
+                    mDrawerLayout = findViewById(R.id.drawer_layout)
+                    val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+                    drawerButton.setOnClickListener {
+                        mDrawerLayout?.openDrawer(GravityCompat.START)
+                    }
+
+                    nav_view.setNavigationItemSelectedListener(this)
+
+                    gridView = findViewById<GridView>(R.id.grid) as GridView
+                    cargar(horario)
+                }
+            }
+
+        /*modificar.setOnClickListener { view ->
             //val fragment = MainFragment()
             //Toast.makeText(this, "Hola soy modificar" , Toast.LENGTH_SHORT).show()
             //TODO
@@ -61,6 +143,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") { dialog, which ->
                 //TODO
                 //miHorario.addCurso()
+
             }
             alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancelar") { dialog, which ->
                 alertDialog.cancel()
@@ -85,7 +168,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         gridView = findViewById<GridView>(R.id.grid) as GridView
         cargar()
 
-        /*
+        *//*
         val EXECUTION_TIME: Long = 60000 // 1 minuto
         val handler = Handler()
         handler.postDelayed(object : Runnable {
@@ -97,8 +180,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         */
     }
 
-    fun cargar() {
-        val horario: Horario = miHorario
+    fun cargar(horario: Horario) {
         adapter = CursoAdapter(this, horario)
         gridView.adapter = adapter
     }
