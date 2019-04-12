@@ -79,10 +79,12 @@ class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationIt
        //var hola = LoginActivity().correo
 
         val myDB = FirebaseFirestore.getInstance()
+        //var recuperarCorreo: String = intent.getStringExtra("correoIngreso")
+        val user : FirebaseUser? = FirebaseAuth.getInstance().currentUser
 
         myDB.collection("Estudiantes")
                 //TODO en el value "Andy" cambiar a el correo que el usuario ingresa
-            .whereEqualTo("correo", "Andy")
+            .whereEqualTo("correo", user?.email)
             .get().addOnSuccessListener {
                 it.forEach {
                     txtNombre.text = it.get("nombre").toString()
