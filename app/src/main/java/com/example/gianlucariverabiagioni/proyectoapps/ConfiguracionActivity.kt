@@ -69,6 +69,12 @@ class ConfiguracionActivity : AppCompatActivity(), NavigationView.OnNavigationIt
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
+        mDrawerLayout = findViewById(R.id.drawer_layout)
+        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
+        drawerButton.setOnClickListener {
+            mDrawerLayout?.openDrawer(GravityCompat.START)
+        }
+
         nav_view.setNavigationItemSelectedListener(this)
 
         ref = FirebaseDatabase.getInstance().getReference("Estudiantes")
