@@ -24,7 +24,7 @@ class Horario{
     lateinit var viernes: MutableMap<Int, Curso?>
 
     init {
-        for (i in 0..(horas.size-1)){
+        for (i in 0..(this.horas.size-1)){
             this.horasP = hashMapOf( i to Curso(horas[i].inicioHora, horas[i].finalHora))
             this.lunes = hashMapOf( i to null)
             this.martes = hashMapOf( i to null)
@@ -55,7 +55,7 @@ class Horario{
     fun toArray(): ArrayList<String?> {
         val horarioArray = ArrayList<String?>()
 
-        for (i in 0..(horas.size-1)){
+        for (i in 0..(this.horas.size-1)){
             horarioArray.add(horasP[i]?.nombre)
             horarioArray.add(lunes[i]?.nombre)
             horarioArray.add(martes[i]?.nombre)

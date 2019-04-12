@@ -12,7 +12,6 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-<<<<<<< HEAD
 import android.widget.TextView
 import com.example.gianlucariverabiagioni.proyectoapps.classes.Estudiante
 import com.google.android.gms.tasks.OnSuccessListener
@@ -21,9 +20,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
-=======
 import android.widget.ImageButton
->>>>>>> 17a95fe7360b7a1ee3a43cbb19623907943dc643
 import kotlinx.android.synthetic.main.activity_configuracion.*
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.firestore.QueryDocumentSnapshot
