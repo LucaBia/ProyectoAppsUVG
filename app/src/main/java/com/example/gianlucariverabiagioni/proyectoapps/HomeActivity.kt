@@ -63,7 +63,7 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_home)
 
         database = FirebaseDatabase.getInstance()
-        //dbRefer = database.reference.child("Estudiantes")
+        dbRefer = database.reference.child("Estudiantes")
         db = FirebaseFirestore.getInstance()
         user = FirebaseAuth.getInstance().currentUser!!
 
@@ -79,9 +79,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     println("---------------------------------------------------------------------------------------------")*/
 
                     modificar.setOnClickListener { view ->
-                        //val fragment = MainFragment()
-                        //Toast.makeText(this, "Hola soy modificar" , Toast.LENGTH_SHORT).show()
-                        //TODO
                         var alertDialog: AlertDialog
                         alertDialog = AlertDialog.Builder(this,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
                         alertDialog.setTitle("Agregar Curso")
@@ -97,12 +94,17 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") { dialog, which ->
                             //TODO
                             //miHorario.addCurso()
-
                         }
                         alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancelar") { dialog, which ->
                             alertDialog.cancel()
                         }
                         alertDialog.show()
+
+                        horario.addCurso("Lunes", 2, "Apps", "H-302")
+
+                        it.data.set("horario", horario)
+
+                        cargar(horario)
                     }
 
                     val toggle = ActionBarDrawerToggle(
@@ -123,61 +125,6 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     cargar(horario)
                 }
             }
-
-        /*modificar.setOnClickListener { view ->
-            //val fragment = MainFragment()
-            //Toast.makeText(this, "Hola soy modificar" , Toast.LENGTH_SHORT).show()
-            //TODO
-            var alertDialog: AlertDialog
-            alertDialog = AlertDialog.Builder(this,R.style.Base_Theme_MaterialComponents_Dialog_Alert).create()
-            alertDialog.setTitle("Agregar Curso")
-            alertDialog.setMessage("Dia")
-            alertDialog.setMessage("Hora Inicio")
-            alertDialog.setMessage("Curso")
-            alertDialog.setMessage("Salon")
-
-            var inputSalon = EditText(this)
-            inputSalon.hint = "salon"
-            alertDialog.setView(inputSalon)
-
-            alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") { dialog, which ->
-                //TODO
-                //miHorario.addCurso()
-
-            }
-            alertDialog.setButton(Dialog.BUTTON_NEGATIVE,"Cancelar") { dialog, which ->
-                alertDialog.cancel()
-            }
-            alertDialog.show()
-        }
-
-        val toggle = ActionBarDrawerToggle(
-            this, drawer_layout, R.string.navigation_drawer_open, R.string.navigation_drawer_close
-        )
-        drawer_layout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        mDrawerLayout = findViewById(R.id.drawer_layout)
-        val drawerButton = findViewById<ImageButton>(R.id.drawerOpen)
-        drawerButton.setOnClickListener {
-            mDrawerLayout?.openDrawer(GravityCompat.START)
-        }
-
-        nav_view.setNavigationItemSelectedListener(this)
-
-        gridView = findViewById<GridView>(R.id.grid) as GridView
-        cargar()
-
-        *//*
-        val EXECUTION_TIME: Long = 60000 // 1 minuto
-        val handler = Handler()
-        handler.postDelayed(object : Runnable {
-            override fun run() {
-                cargar()
-                handler.postDelayed(this, EXECUTION_TIME)
-            }
-        }, EXECUTION_TIME)
-        */
     }
 
     fun cargar(horario: Horario) {
