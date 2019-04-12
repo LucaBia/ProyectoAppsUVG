@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.app_bar_home.*
 import com.example.gianlucariverabiagioni.proyectoapps.adapters.CursoAdapter
 import android.support.v4.os.HandlerCompat.postDelayed
 import android.support.v7.app.AlertDialog
+import android.widget.EditText
 import android.widget.ImageButton
 
 
@@ -52,6 +53,11 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             alertDialog.setMessage("Hora Inicio")
             alertDialog.setMessage("Curso")
             alertDialog.setMessage("Salon")
+
+            var inputSalon = EditText(this)
+            inputSalon.hint = "salon"
+            alertDialog.setView(inputSalon)
+
             alertDialog.setButton(Dialog.BUTTON_POSITIVE,"Contactar") { dialog, which ->
                 //TODO
                 //miHorario.addCurso()
